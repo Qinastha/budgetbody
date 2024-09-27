@@ -1,0 +1,45 @@
+.loginPageWrapper {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+
+  .loginPage--header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+
+  .loginContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .loginContainer--form {
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+
+      input {
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+      }
+    }
+
+    button {
+      width: 50%;
+      align-self: center;
+    }
+  }
+}
