@@ -1,0 +1,20 @@
+.periodItemContainer {
+  ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    box-sizing: border-box;
+
+    li {
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 4px;
+      transition: color 0.3s ease;
+
+      &:hover,
+      &.active {
+        color: green;
+      }
+    }
+  }
+}

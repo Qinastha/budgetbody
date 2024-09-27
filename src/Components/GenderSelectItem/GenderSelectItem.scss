@@ -6,6 +6,11 @@
 
   &--label {
     flex-basis: 100%;
+    text-align: start;
   }
 
+  label {
+    padding-right: 1rem;
+    box-sizing: border-box;
+  }
 }

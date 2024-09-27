@@ -1,53 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Register.scss";
-import { useNavigate } from "react-router-dom";
 import {
   CustomButton,
   CustomNavLink,
   GenderSelectItem,
   LanguageSwitcher,
 } from "../../Components";
-import { Logo, RegisterFormFields } from "../../core";
-import axios from "axios";
+import { Logo, useRegister } from "../../core";
+import { useTranslation } from "react-i18next";
 
 export const Register: React.FC = () => {
-  const navigate = useNavigate();
-  const [registerForm, setRegisterForm] = useState<RegisterFormFields>({
-    email: "",
-    password: "",
-    userName: "",
-    dob: "",
-    address: "",
-    gender: "",
-  });
+  const { t } = useTranslation();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setRegisterForm({ ...registerForm, [name]: value });
-  };
-
-  const handleSubmit = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/api/register",
-        registerForm,
-      );
-      if (response?.data?.value) {
-        localStorage.setItem("token", response.data.value);
-        navigate("/");
-        setRegisterForm({
-          email: "",
-          password: "",
-          userName: "",
-          dob: "",
-          address: "",
-          gender: "",
-        });
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  const { registerForm, errors, handleInputChange, handleSubmit } =
+    useRegister();
 
   return (
     <div className="registerPageWrapper">
@@ -64,51 +30,71 @@ export const Register: React.FC = () => {
             placeholder="Email"
             value={registerForm.email}
             onChange={handleInputChange}
+            className={errors.email ? "error-border" : ""}
             required={true}
           />
+          {errors.email && <p className="error-message">{errors.email}</p>}
+
           <input
             type="password"
             name="password"
             placeholder="Password"
             value={registerForm.password}
             onChange={handleInputChange}
+            className={errors.password ? "error-border" : ""}
             required={true}
           />
+          {errors.password && (
+            <p className="error-message">{errors.password}</p>
+          )}
+
           <input
             type="text"
             name="userName"
             placeholder="Username"
             value={registerForm.userName}
             onChange={handleInputChange}
+            className={errors.userName ? "error-border" : ""}
             required={true}
           />
-          <input
-            type="date"
-            name="dob"
-            placeholder="Date of Birth"
-            value={registerForm.dob}
-            onChange={handleInputChange}
-            required={true}
-          />
+          {errors.userName && (
+            <p className="error-message">{errors.userName}</p>
+          )}
+
           <input
             type="text"
             name="address"
             placeholder="Address"
             value={registerForm.address}
             onChange={handleInputChange}
+            className={errors.address ? "error-border" : ""}
             required={true}
           />
-          <GenderSelectItem
-            form={registerForm}
-            handleInputChange={handleInputChange}
-          />
+          {errors.address && <p className="error-message">{errors.address}</p>}
+
+          <div className="formSplit">
+            <input
+              type="date"
+              name="dob"
+              placeholder="Date of Birth"
+              value={registerForm.dob}
+              onChange={handleInputChange}
+              className={errors.dob ? "error-border" : ""}
+              required={true}
+            />
+            {errors.dob && <p className="error-message">{errors.dob}</p>}
+            <GenderSelectItem
+              form={registerForm}
+              handleInputChange={handleInputChange}
+            />
+          </div>
         </form>
         <p>
           Already have an account?{" "}
           <CustomNavLink link={"/login"} label={"Login here"} />
         </p>
         <CustomButton
-          label={"Submit"}
+          label={t("button.submit")}
           style={"colourButton"}
           onClick={handleSubmit}
         />

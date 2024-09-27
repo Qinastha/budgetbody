@@ -8,8 +8,10 @@ import {
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { LoginFormProps, Logo } from "../../core";
+import { useTranslation } from "react-i18next";
 
 export const Login: React.FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [loginForm, setLoginForm] = useState<LoginFormProps>({
     email: "",
@@ -67,7 +69,7 @@ export const Login: React.FC = () => {
           <CustomNavLink link={"/register"} label={"Register now"} />
         </p>
         <CustomButton
-          label={"Submit"}
+          label={t("button.submit")}
           style={"colourButton"}
           onClick={handleSubmit}
         />

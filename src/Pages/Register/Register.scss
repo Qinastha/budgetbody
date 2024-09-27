@@ -20,6 +20,7 @@
     transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
+    width: 35%;
 
     h2 {
       margin-top: 0;
@@ -28,19 +29,42 @@
 
     .registerContainer--form {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
       box-sizing: border-box;
       width: 100%;
 
       input {
-        padding: 1rem 1rem;
-        margin-bottom: 1rem;
+        padding: 1rem;
+        box-sizing: border-box;
+        transition: all 0.3s ease-in-out;
+
+        &:focus {
+          outline: none;
+          border: 1px solid green;
+        }
+      }
+
+      .error-border {
+        border: 1px solid red;
+      }
+
+      .error-message {
+        color: red;
+        margin: 0;
+      }
+
+      .formSplit {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-content: space-around;
+        align-items: center;
+        gap: 1rem;
       }
     }
 
     button {
-      width: 50%;
+      width: 60%;
       align-self: center;
     }
   }

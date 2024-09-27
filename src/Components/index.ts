@@ -3,7 +3,7 @@ export * from "./CustomButton/CustomButton";
 export * from "./CustomNavLink/CustomNavLink";
 export * from "./ExpenseItem/ExpenseItem";
 export * from "./DashboardItem/DashboardItem";
-export * from "./CustomProgressItem/customProgressItem";
+export * from "./CustomProgressItem/CustomProgressItem";
 export * from "./PeriodItem/PeriodItem";
 export * from "./LanguageSwitcher/LanguageSwitcher";
 export * from "./GenderSelectItem/GenderSelectItem";
