@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { RegisterFormFields } from "../interfaces";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { RegisterProfileForm } from "../types";
 
 export const useRegister = () => {
   const navigate = useNavigate();
-  const [registerForm, setRegisterForm] = useState<RegisterFormFields>({
+  const { t } = useTranslation();
+  const currentYear = new Date().getFullYear();
+  const [registerForm, setRegisterForm] = useState<RegisterProfileForm>({
     email: "",
     password: "",
     userName: "",
@@ -22,7 +25,6 @@ export const useRegister = () => {
   });
 
   const validateForm = () => {
-    const currentYear = new Date().getFullYear();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
     const userNameRegex = /^[a-zA-Z0-9]{3,20}$/;
@@ -38,35 +40,35 @@ export const useRegister = () => {
     };
 
     if (!emailRegex.test(registerForm.email)) {
-      newErrors.email = "Invalid email format.";
+      newErrors.email = t("error.email");
       isValid = false;
     }
 
-    if (!passwordRegex.test(registerForm.password)) {
-      newErrors.password =
-        "Password must be at least 8 characters long, contain one uppercase letter and one number.";
-      isValid = false;
+    if (registerForm.password) {
+      if (!passwordRegex.test(registerForm.password)) {
+        newErrors.password = t("error.password");
+        isValid = false;
+      }
     }
 
     if (!userNameRegex.test(registerForm.userName)) {
-      newErrors.userName =
-        "Username must be 3-20 characters long, alphanumeric only.";
+      newErrors.userName = t("error.userName");
       isValid = false;
     }
 
     if (!registerForm.dob) {
-      newErrors.dob = "Date of birth is required.";
+      newErrors.dob = t("error.dobRequired");
       isValid = false;
     } else {
       const birthYear = new Date(registerForm.dob).getFullYear();
-      if (birthYear < 1900 || birthYear > currentYear) {
-        newErrors.dob = `Year must be between 1900 and ${currentYear}.`;
+      if (birthYear < 1920 || birthYear > currentYear) {
+        newErrors.dob = `${t("error.dobOutOfDate")} ${currentYear}`;
         isValid = false;
       }
     }
 
     if (!addressRegex.test(registerForm.address)) {
-      newErrors.address = "Address contains invalid characters.";
+      newErrors.address = t("error.address");
       isValid = false;
     }
 
@@ -106,6 +108,7 @@ export const useRegister = () => {
   return {
     registerForm,
     errors,
+    currentYear,
     handleInputChange,
     handleSubmit,
   };

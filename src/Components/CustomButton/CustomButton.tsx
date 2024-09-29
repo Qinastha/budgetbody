@@ -3,17 +3,17 @@ import "./CustomButton.scss";
 
 interface CustomButtonProps {
   label: string;
-  style: string;
+  view: string;
   onClick: () => void;
 }
 
 export const CustomButton: React.FC<CustomButtonProps> = ({
   label,
-  style,
+  view,
   onClick,
 }) => {
   return (
-    <button type="button" className={style} onClick={onClick}>
+    <button type="button" className={view} onClick={onClick}>
       {label}
     </button>
   );

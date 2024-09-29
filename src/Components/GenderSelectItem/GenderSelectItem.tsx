@@ -1,9 +1,10 @@
 import React from "react";
 import "./GenderSelectItem.scss";
-import { RegisterFormFields } from "../../core";
+import { useTranslation } from "react-i18next";
+import { SettingsForm } from "../../core";
 
 interface GenderSelectItemProps {
-  form: RegisterFormFields;
+  form: Partial<SettingsForm>;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -11,9 +12,11 @@ export const GenderSelectItem: React.FC<GenderSelectItemProps> = ({
   form,
   handleInputChange,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="gender-group">
-      <label className="gender-group--label">Gender</label>
+      <label className="gender-group--label">{t("gender.label")}</label>
       <label>
         <input
           type="radio"
@@ -22,7 +25,7 @@ export const GenderSelectItem: React.FC<GenderSelectItemProps> = ({
           checked={form.gender === "Male"}
           onChange={handleInputChange}
         />
-        Male
+        {t("gender.male")}
       </label>
       <label>
         <input
@@ -32,7 +35,7 @@ export const GenderSelectItem: React.FC<GenderSelectItemProps> = ({
           checked={form.gender === "Female"}
           onChange={handleInputChange}
         />
-        Female
+        {t("gender.female")}
       </label>
       <label>
         <input
@@ -42,7 +45,7 @@ export const GenderSelectItem: React.FC<GenderSelectItemProps> = ({
           checked={form.gender === "Other"}
           onChange={handleInputChange}
         />
-        Other
+        {t("gender.other")}
       </label>
     </div>
   );

@@ -1,5 +1,4 @@
 .language-switcher {
-
   .flip-container {
     position: relative;
     width: 80px;
@@ -28,7 +27,8 @@
     transform: rotateY(180deg);
   }
 
-  .front, .back {
+  .front,
+  .back {
     position: absolute;
     width: 100%;
     height: 100%;

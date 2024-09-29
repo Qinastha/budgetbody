@@ -6,13 +6,13 @@ import {
   GenderSelectItem,
   LanguageSwitcher,
 } from "../../Components";
-import { Logo, useRegister } from "../../core";
 import { useTranslation } from "react-i18next";
+import { Logo, useRegister } from "../../core";
 
 export const Register: React.FC = () => {
   const { t } = useTranslation();
 
-  const { registerForm, errors, handleInputChange, handleSubmit } =
+  const { registerForm, errors, currentYear, handleInputChange, handleSubmit } =
     useRegister();
 
   return (
@@ -22,67 +22,74 @@ export const Register: React.FC = () => {
         <LanguageSwitcher />
       </div>
       <div className="registerContainer">
-        <h2>Register</h2>
+        <h2>{t("register.title")}</h2>
         <form className="registerContainer--form">
           <input
             type="text"
             name="email"
-            placeholder="Email"
+            placeholder={t("register.placeholder.email")}
             value={registerForm.email}
             onChange={handleInputChange}
             className={errors.email ? "error-border" : ""}
             required={true}
           />
-          {errors.email && <p className="error-message">{errors.email}</p>}
+          {errors.email && <p className="error-message">{t("error.email")}</p>}
 
           <input
             type="password"
             name="password"
-            placeholder="Password"
+            placeholder={t("register.placeholder.password")}
             value={registerForm.password}
             onChange={handleInputChange}
             className={errors.password ? "error-border" : ""}
             required={true}
           />
           {errors.password && (
-            <p className="error-message">{errors.password}</p>
+            <p className="error-message">{t("error.password")}</p>
           )}
 
           <input
             type="text"
             name="userName"
-            placeholder="Username"
+            placeholder={t("register.placeholder.userName")}
             value={registerForm.userName}
             onChange={handleInputChange}
             className={errors.userName ? "error-border" : ""}
             required={true}
           />
           {errors.userName && (
-            <p className="error-message">{errors.userName}</p>
+            <p className="error-message">{t("error.userName")}</p>
           )}
 
           <input
             type="text"
             name="address"
-            placeholder="Address"
+            placeholder={t("register.placeholder.address")}
             value={registerForm.address}
             onChange={handleInputChange}
             className={errors.address ? "error-border" : ""}
             required={true}
           />
-          {errors.address && <p className="error-message">{errors.address}</p>}
+          {errors.address && (
+            <p className="error-message">{t("error.address")}</p>
+          )}
 
           <div className="formSplit">
             <input
               type="date"
               name="dob"
-              placeholder="Date of Birth"
+              placeholder={t("register.placeholder.dob")}
               value={registerForm.dob}
               onChange={handleInputChange}
               className={errors.dob ? "error-border" : ""}
+              max={`${currentYear}-12-31`}
               required={true}
             />
-            {errors.dob && <p className="error-message">{errors.dob}</p>}
+            {errors.dob && (
+              <p className="error-message">
+                {t("error.dobOutOfDate")} {currentYear}
+              </p>
+            )}
             <GenderSelectItem
               form={registerForm}
               handleInputChange={handleInputChange}
@@ -90,12 +97,12 @@ export const Register: React.FC = () => {
           </div>
         </form>
         <p>
-          Already have an account?{" "}
-          <CustomNavLink link={"/login"} label={"Login here"} />
+          {t("register.alreadyHaveAccount")}{" "}
+          <CustomNavLink link={"/login"} label={t("register.loginHere")} />
         </p>
         <CustomButton
           label={t("button.submit")}
-          style={"colourButton"}
+          view={"colourButton"}
           onClick={handleSubmit}
         />
       </div>

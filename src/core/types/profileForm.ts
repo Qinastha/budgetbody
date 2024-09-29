@@ -1,10 +1,10 @@
-import { Gender } from "../types/gender";
+import { Gender } from "./gender";
 
-export interface RegisterFormFields {
+export type RegisterProfileForm = {
   email: string;
   password: string;
   userName: string;
   dob: string;
   address: string;
   gender: Gender;
-}
+};

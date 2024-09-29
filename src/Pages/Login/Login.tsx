@@ -47,30 +47,30 @@ export const Login: React.FC = () => {
         <LanguageSwitcher />
       </div>
       <div className="loginContainer">
-        <h2>Login</h2>
+        <h2>{t("login.title")}</h2>
         <form className="loginContainer--form">
           <input
             type="text"
             name="email"
-            placeholder="Email"
+            placeholder={t("login.placeholder.email")}
             value={loginForm.email}
             onChange={handleInputChange}
           />
           <input
             type="password"
             name="password"
-            placeholder="Password"
+            placeholder={t("login.placeholder.password")}
             value={loginForm.password}
             onChange={handleInputChange}
           />
         </form>
         <p>
-          Don't have an account?{" "}
-          <CustomNavLink link={"/register"} label={"Register now"} />
+          {t("login.noAccount")}{" "}
+          <CustomNavLink link={"/register"} label={t("login.registerNow")} />
         </p>
         <CustomButton
           label={t("button.submit")}
-          style={"colourButton"}
+          view={"colourButton"}
           onClick={handleSubmit}
         />
       </div>

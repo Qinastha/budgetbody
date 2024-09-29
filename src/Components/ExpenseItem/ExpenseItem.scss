@@ -5,7 +5,8 @@
   align-items: center;
   width: 30%;
 
-  .expenseIteLeftPart, .expenseIteRightPart {
+  .expenseIteLeftPart,
+  .expenseIteRightPart {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -33,5 +34,4 @@
       color: red;
     }
   }
-
 }
