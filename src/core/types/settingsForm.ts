@@ -5,12 +5,12 @@ import { DiagramType } from "./diagramType";
 
 export type SettingsForm = Omit<RegisterProfileForm, "password" | "email"> & {
   monthIncome: number;
-  healthCare: number;
+  monthHealthcare: number;
   monthTax: number;
-  housing: number;
-  monthCreditExpense: number;
-  otherExpenses: number;
-  currency: Currency;
+  monthHousing: number;
+  monthCredit: number;
+  monthOther: number;
+  currency: string;
   appTheme: Theme;
   diagramType: DiagramType;
 };

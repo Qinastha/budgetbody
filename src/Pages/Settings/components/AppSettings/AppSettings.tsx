@@ -47,8 +47,8 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
           <label>{t("appSettings.healthcare")}</label>
           <input
             type="text"
-            name="healthCare"
-            value={form.healthCare}
+            name="monthHealthcare"
+            value={form.monthHealthcare}
             onChange={handleInputChange}
             onKeyDown={handleOnlyNumbers}
           />
@@ -61,7 +61,7 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
             onChange={handleInputChange}>
             <option value="USD">$</option>
             <option value="EUR">€</option>
-            <option value="UAN">₴</option>
+            <option value="UAH">₴</option>
           </select>
         </div>
         <div className="appSettingsContainer--inputs_item">
@@ -78,8 +78,8 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
           <label>{t("appSettings.housing")}</label>
           <input
             type="text"
-            name="housing"
-            value={form.housing}
+            name="monthHousing"
+            value={form.monthHousing}
             onChange={handleInputChange}
             onKeyDown={handleOnlyNumbers}
           />
@@ -90,7 +90,7 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
             name="appTheme"
             value={form.appTheme}
             onChange={handleInputChange}>
-            <option value="black-green">
+            <option value="dark-green">
               {t("appSettings.theme.blackGreen")}
             </option>
             <option value="light-blue">
@@ -102,8 +102,8 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
           <label>{t("appSettings.monthCreditExpense")}</label>
           <input
             type="text"
-            name="monthCreditExpense"
-            value={form.monthCreditExpense}
+            name="monthCredit"
+            value={form.monthCredit}
             onChange={handleInputChange}
             onKeyDown={handleOnlyNumbers}
           />
@@ -112,8 +112,8 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
           <label>{t("appSettings.otherExpenses")}</label>
           <input
             type="text"
-            name="otherExpenses"
-            value={form.otherExpenses}
+            name="monthOther"
+            value={form.monthOther}
             onChange={handleInputChange}
             onKeyDown={handleOnlyNumbers}
           />
@@ -124,8 +124,9 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
             name="diagramType"
             value={form.diagramType}
             onChange={handleInputChange}>
-            <option value="line chart">{t("appSettings.lineChart")}</option>
-            <option value="column chart">{t("appSettings.columnChart")}</option>
+            <option value="line">{t("appSettings.lineChart")}</option>
+            <option value="area">{t("appSettings.areaChart")}</option>
+            <option value="bar">{t("appSettings.barChart")}</option>
           </select>
         </div>
       </div>

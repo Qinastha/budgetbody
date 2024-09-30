@@ -4,7 +4,7 @@ export type RegisterProfileForm = {
   email: string;
   password: string;
   userName: string;
-  dob: string;
+  dateOfBirth: string;
   address: string;
   gender: Gender;
 };

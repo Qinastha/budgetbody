@@ -1,27 +1,36 @@
 import React, { useState } from "react";
 import "./Settings.scss";
-import { SettingsForm } from "../../core";
+import { ICurrency, SettingsForm } from "../../core";
 import { ProfileSettings } from "./components/ProfileSettings/ProfileSettings";
 import { useTranslation } from "react-i18next";
 import { AppSettings } from "./components/AppSettings/AppSettings";
 import { CustomButton } from "../../Components";
+import { useAppSelector } from "../../hooks";
+import { defaultCurrency, getUser } from "../../store/userSlice";
 
 export const Settings: React.FC = () => {
   const { t } = useTranslation();
+  const { applicationSettings, address, dateOfBirth, gender, userName } =
+    useAppSelector(getUser);
+
+  const userCurrency: ICurrency =
+    applicationSettings?.currency ?? defaultCurrency;
+
   const [settingsForm, setSettingsForm] = useState<SettingsForm>({
-    userName: "",
-    address: "",
-    dob: "",
-    gender: "",
-    monthIncome: 0,
-    healthCare: 0,
-    monthTax: 0,
-    housing: 0,
-    monthCreditExpense: 0,
-    otherExpenses: 0,
-    currency: "USD",
-    appTheme: "black-green",
-    diagramType: "line chart",
+    userName: userName ?? "",
+    address: address ?? "",
+    dateOfBirth: dateOfBirth ? dateOfBirth.split("T")[0] : "",
+    gender: gender ?? "",
+    monthIncome: applicationSettings?.monthIncome[userCurrency.code] ?? 0,
+    monthHealthcare:
+      applicationSettings?.monthHealthcare[userCurrency.code] ?? 0,
+    monthTax: applicationSettings?.monthTax[userCurrency.code] ?? 0,
+    monthHousing: applicationSettings?.monthHousing[userCurrency.code] ?? 0,
+    monthCredit: applicationSettings?.monthCredit[userCurrency.code] ?? 0,
+    monthOther: applicationSettings?.monthOther[userCurrency.code] ?? 0,
+    currency: applicationSettings?.currency?.code ?? "USD",
+    appTheme: applicationSettings?.theme ?? "dark-green",
+    diagramType: applicationSettings?.diagramLineType ?? "line",
   });
 
   const handleInputChange = (

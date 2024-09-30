@@ -12,7 +12,7 @@ export const useRegister = () => {
     email: "",
     password: "",
     userName: "",
-    dob: "",
+    dateOfBirth: "",
     address: "",
     gender: "",
   });
@@ -20,7 +20,7 @@ export const useRegister = () => {
     email: "",
     password: "",
     userName: "",
-    dob: "",
+    dateOfBirth: "",
     address: "",
   });
 
@@ -35,7 +35,7 @@ export const useRegister = () => {
       email: "",
       password: "",
       userName: "",
-      dob: "",
+      dateOfBirth: "",
       address: "",
     };
 
@@ -56,13 +56,13 @@ export const useRegister = () => {
       isValid = false;
     }
 
-    if (!registerForm.dob) {
-      newErrors.dob = t("error.dobRequired");
+    if (!registerForm.dateOfBirth) {
+      newErrors.dateOfBirth = t("error.dobRequired");
       isValid = false;
     } else {
-      const birthYear = new Date(registerForm.dob).getFullYear();
-      if (birthYear < 1920 || birthYear > currentYear) {
-        newErrors.dob = `${t("error.dobOutOfDate")} ${currentYear}`;
+      const birthYear = new Date(registerForm.dateOfBirth).getFullYear();
+      if (birthYear < 1900 || birthYear > currentYear) {
+        newErrors.dateOfBirth = `${t("error.dobOutOfDate")} ${currentYear}`;
         isValid = false;
       }
     }
@@ -85,7 +85,7 @@ export const useRegister = () => {
     if (!validateForm()) return;
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/register",
+        `${process.env.REACT_APP_BASE_URL}/auth/register`,
         registerForm,
       );
       if (response?.data?.value) {
@@ -95,7 +95,7 @@ export const useRegister = () => {
           email: "",
           password: "",
           userName: "",
-          dob: "",
+          dateOfBirth: "",
           address: "",
           gender: "",
         });

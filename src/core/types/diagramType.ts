@@ -1,1 +1,1 @@
-export type DiagramType = "line chart" | "column chart" | "";
+export type DiagramType = "line" | "area" | "bar" | "";

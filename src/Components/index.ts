@@ -7,3 +7,4 @@ export * from "./CustomProgressItem/CustomProgressItem";
 export * from "./PeriodItem/PeriodItem";
 export * from "./LanguageSwitcher/LanguageSwitcher";
 export * from "./GenderSelectItem/GenderSelectItem";
+export * from "./MiniProfile/MiniProfile";
