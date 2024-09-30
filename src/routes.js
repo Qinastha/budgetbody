@@ -12,18 +12,20 @@ import {
   Register,
   Settings,
 } from "./Pages";
+import { userLoader } from "./loaders";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route
         path="/"
+        loader={userLoader}
         element={
           <PrivateRoute>
             <Layout />
           </PrivateRoute>
         }>
-        <Route path="dashboard" element={<Dashboard />} />
+        <Route index element={<Dashboard />} />
         <Route path="expenses" element={<Expenses />} />
         <Route path="settings" element={<Settings />} />
       </Route>

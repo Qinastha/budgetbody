@@ -32,9 +32,9 @@ export const ProfileSettings: React.FC<ProfileSettingsProps> = ({
           <label>{t("register.placeholder.dob")}</label>
           <input
             type="date"
-            name="dob"
+            name="dateOfBirth"
             max={`${currentYear}-12-31`}
-            value={form.dob}
+            value={form.dateOfBirth}
             onChange={handleInputChange}
           />
         </div>

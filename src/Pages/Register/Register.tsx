@@ -77,15 +77,15 @@ export const Register: React.FC = () => {
           <div className="formSplit">
             <input
               type="date"
-              name="dob"
+              name="dateOfBirth"
               placeholder={t("register.placeholder.dob")}
-              value={registerForm.dob}
+              value={registerForm.dateOfBirth}
               onChange={handleInputChange}
-              className={errors.dob ? "error-border" : ""}
+              className={errors.dateOfBirth ? "error-border" : ""}
               max={`${currentYear}-12-31`}
               required={true}
             />
-            {errors.dob && (
+            {errors.dateOfBirth && (
               <p className="error-message">
                 {t("error.dobOutOfDate")} {currentYear}
               </p>

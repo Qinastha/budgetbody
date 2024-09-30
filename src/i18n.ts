@@ -19,7 +19,7 @@ const resources = {
       "error.userName":
         "Username must be 3-20 characters long, alphanumeric only",
       "error.dobRequired": "Date of birth is required",
-      "error.dobOutOfDate": "Year must be between 1920 and",
+      "error.dobOutOfDate": "Year must be between 1900 and",
       "error.address": "Address contains invalid characters.",
       "register.title": "Register",
       "register.placeholder.email": "Email",
@@ -58,7 +58,8 @@ const resources = {
       "appSettings.otherExpenses": "Other expenses",
       "appSettings.diagramType": "Diagram type",
       "appSettings.lineChart": "Line chart",
-      "appSettings.columnChart": "Column chart",
+      "appSettings.areaChart": "Area chart",
+      "appSettings.barChart": "Bar chart",
     },
   },
   ua: {
@@ -78,7 +79,7 @@ const resources = {
       "error.userName":
         "Логін повинен містити від 3 до 20 символів, латинськими літерами і цифрами",
       "error.dobRequired": "Дата народження обов'язкова",
-      "error.dobOutOfDate": "Рік повинен бути від 1920 до",
+      "error.dobOutOfDate": "Рік повинен бути від 1900 до",
       "error.address": "Адреса містить неприпустимі символи.",
       "register.title": "Реєстрація",
       "register.placeholder.email": "Електронна пошта",
@@ -117,7 +118,8 @@ const resources = {
       "appSettings.otherExpenses": "Інші витрати",
       "appSettings.diagramType": "Тип діаграми",
       "appSettings.lineChart": "Лінійна діаграма",
-      "appSettings.columnChart": "Стовпчаста діаграма",
+      "appSettings.areaChart": "Площинна діаграма",
+      "appSettings.barChart": "Стовпчаста діаграма",
     },
   },
 };
