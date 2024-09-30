@@ -1,0 +1,30 @@
+.dashboardItemContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+
+  &--module {
+    padding: 0.5rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 30%;
+    border-radius: 10%;
+    background: green;
+
+    h4 {
+      margin: 0;
+      padding: 0.5rem;
+      box-sizing: border-box;
+    }
+
+    p {
+      margin: 0;
+      padding: 0.5rem;
+      box-sizing: border-box;
+      align-self: center;
+    }
+  }
+}

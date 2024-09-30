@@ -1,0 +1,16 @@
+.gender-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+
+  &--label {
+    flex-basis: 100%;
+    text-align: start;
+  }
+
+  label {
+    padding-right: 1rem;
+    box-sizing: border-box;
+  }
+}
