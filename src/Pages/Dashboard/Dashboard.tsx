@@ -1,6 +1,14 @@
 import React from "react";
 import "./Dashboard.scss";
+import { DashboardItem } from "../../Components";
+import { useAppSelector } from "../../hooks";
+import { getUser } from "../../store/userSlice";
 
 export const Dashboard: React.FC = () => {
-  return <div>Dashboard Page</div>;
+  const user = useAppSelector(getUser);
+  return (
+    <div>
+      <DashboardItem user={user} />
+    </div>
+  );
 };

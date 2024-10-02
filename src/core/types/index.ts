@@ -4,6 +4,6 @@ export * from "./loginForm";
 export * from "./currency";
 export * from "./theme";
 export * from "./diagramType";
-export * from "./settingsForm";
+export * from "./ApplicationSettingsForm";
 export * from "./timeResolution";
 export * from "./dashboardCalculation";

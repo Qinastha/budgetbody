@@ -1,23 +1,33 @@
 import React from "react";
 import "./DashboardItem.scss";
 import { useTranslation } from "react-i18next";
+import { IUser } from "../../core";
 
-export const DashboardItem: React.FC = () => {
+interface DashboardItemProps {
+  user: IUser;
+}
+
+export const DashboardItem: React.FC<DashboardItemProps> = ({ user }) => {
   const { t } = useTranslation();
-
+  const userCurrentCurrency = user.applicationSettings.currency.code;
+  const userIncome = user.applicationSettings.monthIncome[userCurrentCurrency];
+  const userExpense = 20;
   return (
     <div className="dashboardItemContainer">
       <div className="dashboardItemContainer--module">
         <h4>{t("dashboard.income")}</h4>
-        <p>$1000</p>
+        <p>{userIncome + userCurrentCurrency}</p>
       </div>
       <div className="dashboardItemContainer--module">
         <h4>{t("dashboard.expense")}</h4>
-        <p>$800</p>
+        <p>{userExpense + userCurrentCurrency}</p>
       </div>
       <div className="dashboardItemContainer--module">
         <h4>{t("dashboard.saved")}</h4>
-        <p>$300</p>
+        <p>
+          {userIncome - userExpense}
+          {userCurrentCurrency}
+        </p>
       </div>
     </div>
   );

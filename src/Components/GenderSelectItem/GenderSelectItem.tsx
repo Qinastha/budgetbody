@@ -1,10 +1,10 @@
 import React from "react";
 import "./GenderSelectItem.scss";
 import { useTranslation } from "react-i18next";
-import { SettingsForm } from "../../core";
+import { RegisterProfileForm } from "../../core";
 
 interface GenderSelectItemProps {
-  form: Partial<SettingsForm>;
+  form: Partial<RegisterProfileForm>;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
