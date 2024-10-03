@@ -1,15 +1,29 @@
 import React from "react";
 import "./ExpenseItem.scss";
+import { ICurrency, ITimeSeries } from "../../core";
+import { Categories } from "../../core/types/categories";
 
-export const ExpenseItem: React.FC = () => {
+interface ExpenseItemProps {
+  expense: ITimeSeries;
+  userCurrency: ICurrency;
+  categoryLabels: Record<Categories, string>;
+}
+
+export const ExpenseItem: React.FC<ExpenseItemProps> = ({
+  expense,
+  userCurrency,
+  categoryLabels,
+}) => {
   return (
     <div className="expenseItemContainer">
-      <span className="expenseIteLeftPart">
+      <span className="expenseItemLeftPart">
         <img src="" alt="logo" className="categoryLogo" />
-        <p>Category Name</p>
+        <p>{categoryLabels[expense.category]}</p>
       </span>
-      <span className="expenseIteRightPart">
-        <p className="spendSum">$100.00</p>
+      <span className="expenseItemRightPart">
+        <p className="spendSum">
+          {expense.value[userCurrency.code] + userCurrency.symbol}
+        </p>
         <button type="button">X</button>
       </span>
     </div>

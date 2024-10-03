@@ -1,0 +1,66 @@
+.expensesContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(70%, 1fr) 30%;
+  padding: 1rem;
+  box-sizing: border-box;
+
+  h1 {
+    margin: 0;
+    text-align: center;
+    padding-bottom: 1rem;
+    box-sizing: border-box;
+  }
+
+  &--left {
+    display: flex;
+    flex-direction: column;
+    padding-right: 2rem;
+    box-sizing: border-box;
+
+    .addExpenseButton {
+      cursor: pointer;
+      color: white;
+      padding-bottom: 2rem;
+      border-radius: 4px;
+      box-sizing: border-box;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        transform: translateX(10px);
+        color: green;
+      }
+    }
+
+    &_list {
+      background-color: rgba(255, 255, 255, 0.4);
+      border-radius: 5%;
+
+      &-item {
+        padding: 0.5rem;
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  &--right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 10%;
+    width: 100%;
+    height: 100%;
+
+    h4 {
+      margin: 0;
+      padding: 2rem 1rem;
+      box-sizing: border-box;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+  }
+}

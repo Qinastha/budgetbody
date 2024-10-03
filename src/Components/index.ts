@@ -8,3 +8,4 @@ export * from "./PeriodItem/PeriodItem";
 export * from "./LanguageSwitcher/LanguageSwitcher";
 export * from "./GenderSelectItem/GenderSelectItem";
 export * from "./MiniProfile/MiniProfile";
+export * from "./ExpenseSidebar/ExpenseSidebar";

@@ -15,6 +15,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    align-items: end;
     gap: 1rem;
     box-sizing: border-box;
 
@@ -23,24 +24,14 @@
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
-
-      label {
-        padding: 0 0.2rem;
-        box-sizing: border-box;
-      }
     }
 
     &_item {
       width: 75%;
-
-      input {
-        padding: 0.5rem;
-        box-sizing: border-box;
-      }
     }
 
     &_select {
-      width: 50%;
+      width: 60%;
 
       select {
         padding: 0.5rem;

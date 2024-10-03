@@ -9,6 +9,8 @@ import {
   RegisterProfileForm,
 } from "../core";
 import axios from "axios";
+import { Categories } from "../core/types/categories";
+import { IMainExpenses } from "../core/interfaces/IMainExpenses";
 
 export const zeroFinances: IFinances = {
   USD: 0,
@@ -187,19 +189,13 @@ export const user = createSlice({
     setUserAvatar: (state, action: PayloadAction<string>) => {
       return { ...state, avatar: action.payload };
     },
-    setUserCurrency: (state, action: PayloadAction<ICurrency>) => {
-      return {
-        ...state,
-        applicationSettings: {
-          ...state.applicationSettings,
-          currency: action.payload,
-        },
-      };
-    },
   },
   selectors: {
     getUser: state => state,
     getUserAvatar: state => state.avatar,
+    getUserExpenses: state => state.expenses,
+    getUserIncomes: state => state.incomes,
+    getUserCurrency: state => state.applicationSettings.currency,
   },
   extraReducers: builder => {
     builder.addCase(
@@ -241,8 +237,14 @@ export const user = createSlice({
   },
 });
 
-export const { setUserAvatar, setUserCurrency } = user.actions;
+export const { setUserAvatar } = user.actions;
 
-export const { getUser, getUserAvatar } = user.selectors;
+export const {
+  getUser,
+  getUserAvatar,
+  getUserExpenses,
+  getUserIncomes,
+  getUserCurrency,
+} = user.selectors;
 
 export default user.reducer;
