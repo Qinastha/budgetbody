@@ -3,22 +3,24 @@ import "./ExpenseSidebar.scss";
 import { Categories } from "../../core/types/categories";
 import { CustomButton } from "../CustomButton/CustomButton";
 import { useTranslation } from "react-i18next";
+import { EXPENSE_LABELS, handleOnlyNumbers } from "../../core";
+import { useAppDispatch } from "../../hooks";
+import { handleAddExpense } from "../../store/userSlice";
 
 interface SidebarProps {
   isSidebarVisible: boolean;
-  categoryLabels: Record<Categories, string>;
   toggleSidebar: () => void;
 }
 
 export const ExpenseSidebar: React.FC<SidebarProps> = ({
   isSidebarVisible,
-  categoryLabels,
   toggleSidebar,
 }) => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const [newExpense, setNewExpense] = useState({
     category: "",
-    amount: 0,
+    value: "",
   });
 
   const handleCategoryClick = (category: Categories) => {
@@ -26,11 +28,26 @@ export const ExpenseSidebar: React.FC<SidebarProps> = ({
   };
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewExpense({ ...newExpense, amount: +e.target.value });
+    setNewExpense({ ...newExpense, value: e.target.value });
+  };
+
+  const handleNewExpense = () => {
+    const body = {
+      ...newExpense,
+      value: +newExpense.value,
+      timestamp: new Date(Date.now()),
+    };
+    dispatch(handleAddExpense(body));
+    setNewExpense({ category: "", value: "" });
+    toggleSidebar();
   };
 
   return (
-    <div className="overlay" onClick={toggleSidebar}>
+    <>
+      <div
+        className={`overlay ${isSidebarVisible ? "visible" : ""}`}
+        onClick={toggleSidebar}
+      />
       <div className={`sidebarContainer ${isSidebarVisible ? "visible" : ""}`}>
         <div
           className="sidebarContainer--content"
@@ -38,7 +55,7 @@ export const ExpenseSidebar: React.FC<SidebarProps> = ({
           <h2>Add a New Expense</h2>
 
           <div className="sidebarContainer--content_list">
-            {Object.entries(categoryLabels).map(([expenseCategory, label]) => (
+            {Object.entries(EXPENSE_LABELS).map(([expenseCategory, label]) => (
               <div
                 key={expenseCategory}
                 className={`categoryItem ${newExpense.category === expenseCategory ? "selected" : ""}`}
@@ -53,19 +70,20 @@ export const ExpenseSidebar: React.FC<SidebarProps> = ({
           <div className="sidebarContainer--content_input">
             <label>Amount</label>
             <input
-              type="number"
-              value={newExpense.amount}
+              type="text"
+              value={newExpense.value}
               onChange={handleAmountChange}
+              onKeyDown={handleOnlyNumbers}
             />
           </div>
 
           <CustomButton
             label={t("button.submit")}
             view={"submit"}
-            onClick={() => console.log(newExpense)}
+            onClick={handleNewExpense}
           />
         </div>
       </div>
-    </div>
+    </>
   );
 };

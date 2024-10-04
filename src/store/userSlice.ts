@@ -6,11 +6,10 @@ import {
   ICurrency,
   IFinances,
   IUser,
+  newExpenseForm,
   RegisterProfileForm,
 } from "../core";
 import axios from "axios";
-import { Categories } from "../core/types/categories";
-import { IMainExpenses } from "../core/interfaces/IMainExpenses";
 
 export const zeroFinances: IFinances = {
   USD: 0,
@@ -66,6 +65,7 @@ export const defaultAnalytics: IAnalytics = {
   expensesAnalytics: {
     mainExpenses: defaultExpenses,
     timeResolution: "1m" || "3m" || "6m" || "1y",
+    totalExpense: zeroFinances,
   },
 };
 
@@ -182,6 +182,29 @@ export const deleteUserProfile = createAsyncThunk(
   },
 );
 
+export const handleAddExpense = createAsyncThunk(
+  "userData/handleAddExpense",
+  async (data: newExpenseForm) => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/time-series/create-expense`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+      if (response.data?.value) {
+        return response.data.value;
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  },
+);
+
 export const user = createSlice({
   name: "user",
   initialState,
@@ -196,6 +219,7 @@ export const user = createSlice({
     getUserExpenses: state => state.expenses,
     getUserIncomes: state => state.incomes,
     getUserCurrency: state => state.applicationSettings.currency,
+    getExpenseAnalytics: state => state.analytics.expensesAnalytics,
   },
   extraReducers: builder => {
     builder.addCase(
@@ -212,10 +236,7 @@ export const user = createSlice({
       (state, action: PayloadAction<IUser>) => {
         return {
           ...state,
-          userName: action.payload.userName,
-          gender: action.payload.gender,
-          dateOfBirth: action.payload.dateOfBirth,
-          address: action.payload.address,
+          ...action.payload,
         };
       },
     );
@@ -224,16 +245,22 @@ export const user = createSlice({
       (state, action: PayloadAction<IUser>) => {
         return {
           ...state,
-          applicationSettings: {
-            ...state.applicationSettings,
-            ...action.payload.applicationSettings,
-          },
+          ...action.payload,
         };
       },
     );
     builder.addCase(deleteUserProfile.fulfilled, state => {
       return initialState;
     });
+    builder.addCase(
+      handleAddExpense.fulfilled,
+      (state, action: PayloadAction<IUser>) => {
+        return {
+          ...state,
+          ...action.payload,
+        };
+      },
+    );
   },
 });
 
@@ -245,6 +272,7 @@ export const {
   getUserExpenses,
   getUserIncomes,
   getUserCurrency,
+  getExpenseAnalytics,
 } = user.selectors;
 
 export default user.reducer;

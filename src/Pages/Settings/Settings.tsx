@@ -28,15 +28,9 @@ export const Settings: React.FC = () => {
         gender={gender}
         dateOfBirth={dateOfBirth}
         address={address}
+        handleDeleteProfile={handleDeleteProfile}
       />
       <AppSettings applicationSettings={applicationSettings} />
-      <div className="settingsContainer--delete">
-        <CustomButton
-          label={t("button.deleteProfile")}
-          view={"delete"}
-          onClick={handleDeleteProfile}
-        />
-      </div>
     </div>
   );
 };

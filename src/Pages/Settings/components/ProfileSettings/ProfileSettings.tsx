@@ -11,6 +11,7 @@ interface ProfileSettingsProps {
   address: string;
   dateOfBirth: string;
   gender: Gender;
+  handleDeleteProfile: () => void;
 }
 
 export const ProfileSettings: React.FC<ProfileSettingsProps> = ({
@@ -18,6 +19,7 @@ export const ProfileSettings: React.FC<ProfileSettingsProps> = ({
   address,
   dateOfBirth,
   gender,
+  handleDeleteProfile,
 }) => {
   const [profileForm, setProfileForm] = useState<Partial<RegisterProfileForm>>({
     userName: userName ?? "",
@@ -78,11 +80,16 @@ export const ProfileSettings: React.FC<ProfileSettingsProps> = ({
           handleInputChange={handleInputChange}
         />
       </form>
-      <div className="profileSettingsContainer--button">
+      <div className="profileSettingsContainer--buttons">
         <CustomButton
-          label={t("button.submit")}
+          label={t("button.update")}
           view={"white"}
           onClick={handleSubmit}
+        />
+        <CustomButton
+          label={t("button.deleteProfile")}
+          view={"delete"}
+          onClick={handleDeleteProfile}
         />
       </div>
     </div>

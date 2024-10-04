@@ -1,42 +1,39 @@
 import React from "react";
 import "./CustomProgressItem.scss";
-import { ICurrency, ITimeSeries } from "../../core";
+import {
+  ALL_EXPENSE_LABELS,
+  ICurrency,
+  IExpensesAnalytics,
+  IFinances,
+} from "../../core";
 import { Categories } from "../../core/types/categories";
 
 interface CustomProgressItemProps {
-  expenses: ITimeSeries[];
   userCurrency: ICurrency;
-  userIncomes: ITimeSeries[];
-  categoryLabels: Record<Categories, string>;
+  analyticExpense: IExpensesAnalytics;
 }
 
 export const CustomProgressItem: React.FC<CustomProgressItemProps> = ({
-  expenses,
   userCurrency,
-  userIncomes,
-  categoryLabels,
+  analyticExpense,
 }) => {
-  const totalIncome = userIncomes.reduce(
-    (acc, income) => acc + income.value[userCurrency.code],
-    0,
-  );
-
-  const sortedExpenses = [...expenses].sort(
-    (a, b) => b.value[userCurrency.code] - a.value[userCurrency.code],
-  );
+  const sortedExpenseCategories = [
+    ...Object.entries(analyticExpense.mainExpenses),
+  ].sort((a, b) => b[1].USD - a[1].USD);
 
   return (
     <div className="progressItemContainer">
-      {sortedExpenses.map((expense: ITimeSeries) => {
+      {sortedExpenseCategories.map((entry: any) => {
+        const [category, value]: [Categories, IFinances] = entry;
         return (
-          <div key={expense._id} className="progressItemContainer--item">
+          <div key={category} className="progressItemContainer--item">
             <div className="progressItemContainer--item_header">
-              <p>{categoryLabels[expense.category]}</p>
-              <p>{expense.value[userCurrency.code] + userCurrency.symbol}</p>
+              <p>{ALL_EXPENSE_LABELS[category]}</p>
+              <p>{value[userCurrency.code] + userCurrency.symbol}</p>
             </div>
             <progress
-              value={expense.value[userCurrency.code]}
-              max={totalIncome}
+              value={value[userCurrency.code]}
+              max={analyticExpense.totalExpense[userCurrency.code]}
               className="progressItemContainer--item_progress"
             />
           </div>

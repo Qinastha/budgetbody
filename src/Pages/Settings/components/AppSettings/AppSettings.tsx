@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   ApplicationSettingsForm,
+  handleOnlyNumbers,
   IApplicationSettings,
   ICurrency,
 } from "../../../../core";
@@ -111,6 +112,7 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
                 name="monthIncome"
                 value={appSettingsForm.monthIncome}
                 onChange={handleInputChange}
+                onKeyDown={handleOnlyNumbers}
               />
             </div>
             <div className="appSettingsContainer--inputs_item">
@@ -120,6 +122,7 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
                 name="monthHealthcare"
                 value={appSettingsForm.monthHealthcare}
                 onChange={handleInputChange}
+                onKeyDown={handleOnlyNumbers}
               />
             </div>
             <div className="appSettingsContainer--inputs_select">
@@ -142,6 +145,7 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
                 name="monthTax"
                 value={appSettingsForm.monthTax}
                 onChange={handleInputChange}
+                onKeyDown={handleOnlyNumbers}
               />
             </div>
             <div className="appSettingsContainer--inputs_item">
@@ -151,6 +155,7 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
                 name="monthHousing"
                 value={appSettingsForm.monthHousing}
                 onChange={handleInputChange}
+                onKeyDown={handleOnlyNumbers}
               />
             </div>
             <div className="appSettingsContainer--inputs_select">
@@ -174,6 +179,7 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
                 name="monthCredit"
                 value={appSettingsForm.monthCredit}
                 onChange={handleInputChange}
+                onKeyDown={handleOnlyNumbers}
               />
             </div>
             <div className="appSettingsContainer--inputs_item">
@@ -183,6 +189,7 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
                 name="monthOther"
                 value={appSettingsForm.monthOther}
                 onChange={handleInputChange}
+                onKeyDown={handleOnlyNumbers}
               />
             </div>
             <div className="appSettingsContainer--inputs_select">
@@ -199,7 +206,7 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
           </form>
           <div className="appSettingsContainer--button">
             <CustomButton
-              label={t("button.submit")}
+              label={t("button.update")}
               view={"white"}
               onClick={handleSubmit}
             />

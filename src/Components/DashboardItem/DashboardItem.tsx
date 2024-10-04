@@ -11,7 +11,8 @@ export const DashboardItem: React.FC<DashboardItemProps> = ({ user }) => {
   const { t } = useTranslation();
   const userCurrentCurrency = user.applicationSettings.currency.code;
   const userIncome = user.applicationSettings.monthIncome[userCurrentCurrency];
-  const userExpense = 20;
+  const userExpense =
+    user.analytics.expensesAnalytics.totalExpense[userCurrentCurrency];
   return (
     <div className="dashboardItemContainer">
       <div className="dashboardItemContainer--module">
