@@ -5,6 +5,7 @@ import {
   IApplicationSettings,
   ICurrency,
   IFinances,
+  ITimeSeries,
   IUser,
   newExpenseForm,
   RegisterProfileForm,
@@ -108,7 +109,7 @@ export const fetchUserData = createAsyncThunk(
 
 export const updateProfileData = createAsyncThunk(
   "userData/updateProfileData",
-  async (data: Partial<RegisterProfileForm>) => {
+  async (data: Omit<RegisterProfileForm, "email" | "password">) => {
     try {
       const response = await axios.put(
         `${process.env.REACT_APP_BASE_URL}/user/update-profile`,
@@ -120,7 +121,7 @@ export const updateProfileData = createAsyncThunk(
           },
         },
       );
-      if (response.data.value) {
+      if (response?.data?.value) {
         return response.data.value;
       } else {
         console.error("Failed to update user data");
@@ -145,8 +146,7 @@ export const updateApplicationSettingsData = createAsyncThunk(
           },
         },
       );
-      if (response.data.value) {
-        console.log(response.data.value);
+      if (response?.data?.value) {
         return response.data.value;
       } else {
         console.error("Failed to update application settings");
@@ -170,7 +170,7 @@ export const deleteUserProfile = createAsyncThunk(
           },
         },
       );
-      if (response.status == 204) {
+      if (response.status === 204) {
         localStorage.removeItem("token");
         return response.data;
       } else {
@@ -205,6 +205,37 @@ export const handleAddExpense = createAsyncThunk(
   },
 );
 
+export const handleDeleteExpense = createAsyncThunk(
+  "userData/handleDeleteExpense",
+  async (expenseId: string) => {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    };
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/time-series/delete-expense/${expenseId}`,
+        { headers },
+      );
+      if (response.status === 204) {
+        const userResponse = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/user`,
+          { headers },
+        );
+        if (userResponse.data.value) {
+          return userResponse.data.value;
+        } else {
+          console.error("Failed to fetch user data");
+        }
+      } else {
+        console.error("Failed to delete expense");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  },
+);
+
 export const user = createSlice({
   name: "user",
   initialState,
@@ -217,9 +248,10 @@ export const user = createSlice({
     getUser: state => state,
     getUserAvatar: state => state.avatar,
     getUserExpenses: state => state.expenses,
-    getUserIncomes: state => state.incomes,
     getUserCurrency: state => state.applicationSettings.currency,
     getExpenseAnalytics: state => state.analytics.expensesAnalytics,
+    getDashboardAnalytics: state => state.analytics.dashboardAnalytics,
+    getDiagramType: state => state.applicationSettings.diagramLineType,
   },
   extraReducers: builder => {
     builder.addCase(
@@ -236,7 +268,10 @@ export const user = createSlice({
       (state, action: PayloadAction<IUser>) => {
         return {
           ...state,
-          ...action.payload,
+          userName: action.payload.userName,
+          gender: action.payload.gender,
+          dateOfBirth: action.payload.dateOfBirth,
+          address: action.payload.address,
         };
       },
     );
@@ -261,6 +296,15 @@ export const user = createSlice({
         };
       },
     );
+    builder.addCase(
+      handleDeleteExpense.fulfilled,
+      (state, action: PayloadAction<IUser>) => {
+        return {
+          ...state,
+          ...action.payload,
+        };
+      },
+    );
   },
 });
 
@@ -270,9 +314,10 @@ export const {
   getUser,
   getUserAvatar,
   getUserExpenses,
-  getUserIncomes,
   getUserCurrency,
   getExpenseAnalytics,
+  getDashboardAnalytics,
+  getDiagramType,
 } = user.selectors;
 
 export default user.reducer;

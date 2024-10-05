@@ -5,6 +5,7 @@ import { CustomButton, GenderSelectItem } from "../../../../Components";
 import { Gender, RegisterProfileForm } from "../../../../core";
 import { useAppDispatch } from "../../../../hooks";
 import { updateProfileData } from "../../../../store/userSlice";
+import { useNavigate } from "react-router-dom";
 
 interface ProfileSettingsProps {
   userName: string;
@@ -21,13 +22,16 @@ export const ProfileSettings: React.FC<ProfileSettingsProps> = ({
   gender,
   handleDeleteProfile,
 }) => {
-  const [profileForm, setProfileForm] = useState<Partial<RegisterProfileForm>>({
+  const [profileForm, setProfileForm] = useState<
+    Omit<RegisterProfileForm, "email" | "password">
+  >({
     userName: userName ?? "",
     address: address ?? "",
     dateOfBirth: dateOfBirth ? dateOfBirth.split("T")[0] : "",
     gender: gender ?? "",
   });
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
@@ -40,7 +44,7 @@ export const ProfileSettings: React.FC<ProfileSettingsProps> = ({
 
   const handleSubmit = () => {
     dispatch(updateProfileData(profileForm));
-    console.log(profileForm);
+    navigate("/");
   };
   return (
     <div className="profileSettingsContainer">

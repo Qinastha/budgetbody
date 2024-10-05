@@ -3,7 +3,7 @@ export enum eLogo {
   "monthTax" = "paid",
   "monthHousing" = "house",
   "monthCredit" = "credit_card",
-  "monthOther" = "checkbook",
+  "monthOther" = "category",
   "food" = "restaurant",
   "transport" = "directions_car",
   "shopping" = "shopping_bag",

@@ -1,13 +1,19 @@
 .periodItemContainer {
+  padding: 1rem;
+  box-sizing: border-box;
+
   ul {
     list-style: none;
     display: flex;
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
+    align-self: center;
 
     li {
       cursor: pointer;
       padding: 5px 10px;
+      box-sizing: border-box;
       border-radius: 4px;
       transition: color 0.3s ease;
 

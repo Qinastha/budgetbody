@@ -13,6 +13,7 @@ import {
 } from "../../../../store/userSlice";
 import { CustomButton } from "../../../../Components";
 import { useAppDispatch } from "../../../../hooks";
+import { useNavigate } from "react-router-dom";
 
 interface AppSettingsProps {
   applicationSettings: IApplicationSettings;
@@ -22,23 +23,24 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
   applicationSettings,
 }) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const [userCurrency, setUserCurrency] = useState<ICurrency>(
-    applicationSettings.currency,
+    applicationSettings?.currency,
   );
 
   const [appSettingsForm, setAppSettingsForm] =
     useState<ApplicationSettingsForm>({
-      monthIncome: applicationSettings.monthIncome[userCurrency.code],
-      monthHealthcare: applicationSettings.monthHealthcare[userCurrency.code],
-      monthTax: applicationSettings.monthTax[userCurrency.code],
-      monthHousing: applicationSettings.monthHousing[userCurrency.code],
-      monthCredit: applicationSettings.monthCredit[userCurrency.code],
-      monthOther: applicationSettings.monthOther[userCurrency.code],
-      currency: applicationSettings.currency,
-      theme: applicationSettings.theme,
-      diagramLineType: applicationSettings.diagramLineType,
+      monthIncome: applicationSettings?.monthIncome[userCurrency.code],
+      monthHealthcare: applicationSettings?.monthHealthcare[userCurrency.code],
+      monthTax: applicationSettings?.monthTax[userCurrency.code],
+      monthHousing: applicationSettings?.monthHousing[userCurrency.code],
+      monthCredit: applicationSettings?.monthCredit[userCurrency.code],
+      monthOther: applicationSettings?.monthOther[userCurrency.code],
+      currency: applicationSettings?.currency,
+      theme: applicationSettings?.theme,
+      diagramLineType: applicationSettings?.diagramLineType,
     });
 
   const handleInputChange = (
@@ -98,6 +100,7 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
       }
     });
     dispatch(updateApplicationSettingsData(appSettingsForm));
+    navigate("/");
   };
   return (
     <div className="appSettingsContainer">
