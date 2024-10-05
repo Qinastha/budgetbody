@@ -1,7 +1,7 @@
 import React from "react";
 import "./CustomProgressItem.scss";
 import {
-  ALL_EXPENSE_LABELS,
+  getAllExpenseLabels,
   ICurrency,
   IExpensesAnalytics,
   IFinances,
@@ -28,7 +28,7 @@ export const CustomProgressItem: React.FC<CustomProgressItemProps> = ({
         return (
           <div key={category} className="progressItemContainer--item">
             <div className="progressItemContainer--item_header">
-              <p>{ALL_EXPENSE_LABELS[category]}</p>
+              <p>{getAllExpenseLabels()[category]}</p>
               <p>{value[userCurrency.code] + userCurrency.symbol}</p>
             </div>
             <progress

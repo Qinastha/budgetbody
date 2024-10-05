@@ -5,33 +5,39 @@ import {
   getExpenseAnalytics,
   getUserCurrency,
   getUserExpenses,
-  getUserIncomes,
 } from "../../store/userSlice";
-import { ITimeSeries } from "../../core";
+import { ITimeSeries, TimeResolution } from "../../core";
 import {
   CustomProgressItem,
   ExpenseItem,
   ExpenseSidebar,
+  PeriodItem,
 } from "../../Components";
+import { useTranslation } from "react-i18next";
 
 export const Expenses: React.FC = () => {
+  const { t } = useTranslation();
   const userExpenses = useAppSelector(getUserExpenses);
   const userCurrency = useAppSelector(getUserCurrency);
-  const userIncomes = useAppSelector(getUserIncomes);
   const analyticExpense = useAppSelector(getExpenseAnalytics);
   const [isSidebarVisible, setIsSidebarVisible] = useState<boolean>(false);
+  const [activePeriod, setActivePeriod] = useState<TimeResolution>("1m");
 
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarVisible);
+  };
+
+  const handlePeriodChange = (period: TimeResolution) => {
+    setActivePeriod(period);
   };
 
   return (
     <>
       <div className="expensesContainer">
         <div className="expensesContainer--left">
-          <h1>Expenses</h1>
+          <h1>{t("expenses.title")}</h1>
           <div className="addExpenseButton" onClick={toggleSidebar}>
-            Add expense
+            {t("expenses.add")}
           </div>
           {userExpenses.length > 0 ? (
             <div className="expensesContainer--left_list">
@@ -43,7 +49,7 @@ export const Expenses: React.FC = () => {
                 )
                 .map((expense: ITimeSeries) => (
                   <div
-                    className="expensesContainer--list-item"
+                    className="expensesContainer--left_list-item"
                     key={expense._id}>
                     <ExpenseItem
                       expense={expense}
@@ -53,11 +59,15 @@ export const Expenses: React.FC = () => {
                 ))}
             </div>
           ) : (
-            <div>No expenses found. Add your first one</div>
+            <div>{t("expenses.none")}</div>
           )}
         </div>
         <div className="expensesContainer--right">
-          <h4>Where your moneys go:</h4>
+          <PeriodItem
+            activePeriod={activePeriod}
+            handlePeriodChange={handlePeriodChange}
+          />
+          <h4>{t("expenses.where")}:</h4>
           <CustomProgressItem
             userCurrency={userCurrency}
             analyticExpense={analyticExpense}

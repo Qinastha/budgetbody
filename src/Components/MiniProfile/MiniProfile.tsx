@@ -3,9 +3,11 @@ import "./MiniProfile.scss";
 import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { getUser, getUserAvatar, setUserAvatar } from "../../store/userSlice";
+import { useNavigate } from "react-router-dom";
 
 export const MiniProfile: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { avatar, userName } = useAppSelector(getUser);
 
   const handleUploadMessage = async (fileURL: string) => {
@@ -55,6 +57,11 @@ export const MiniProfile: React.FC = () => {
     document.getElementById("file-input")?.click();
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
     <div className="miniProfileContainer">
       <img src={avatar} alt="avatar" onClick={handleButtonClick} />
@@ -65,7 +72,12 @@ export const MiniProfile: React.FC = () => {
         onChange={handleChange}
         accept="image/*"
       />
-      <p>{userName}</p>
+      <div className="miniProfileContainer__lowPart">
+        <p>{userName}</p>
+        <span onClick={handleLogout} className="material-symbols-outlined">
+          logout
+        </span>
+      </div>
     </div>
   );
 };

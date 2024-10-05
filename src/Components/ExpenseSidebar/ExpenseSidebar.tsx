@@ -3,7 +3,7 @@ import "./ExpenseSidebar.scss";
 import { Categories } from "../../core/types/categories";
 import { CustomButton } from "../CustomButton/CustomButton";
 import { useTranslation } from "react-i18next";
-import { EXPENSE_LABELS, handleOnlyNumbers } from "../../core";
+import { getExpenseLabels, handleOnlyNumbers } from "../../core";
 import { useAppDispatch } from "../../hooks";
 import { handleAddExpense } from "../../store/userSlice";
 
@@ -52,23 +52,25 @@ export const ExpenseSidebar: React.FC<SidebarProps> = ({
         <div
           className="sidebarContainer--content"
           onClick={e => e.stopPropagation()}>
-          <h2>Add a New Expense</h2>
+          <h2>{t("eSidebar.title")}</h2>
 
           <div className="sidebarContainer--content_list">
-            {Object.entries(EXPENSE_LABELS).map(([expenseCategory, label]) => (
-              <div
-                key={expenseCategory}
-                className={`categoryItem ${newExpense.category === expenseCategory ? "selected" : ""}`}
-                onClick={() =>
-                  handleCategoryClick(expenseCategory as Categories)
-                }>
-                {label}
-              </div>
-            ))}
+            {Object.entries(getExpenseLabels()).map(
+              ([expenseCategory, label]) => (
+                <div
+                  key={expenseCategory}
+                  className={`categoryItem ${newExpense.category === expenseCategory ? "selected" : ""}`}
+                  onClick={() =>
+                    handleCategoryClick(expenseCategory as Categories)
+                  }>
+                  {label}
+                </div>
+              ),
+            )}
           </div>
 
           <div className="sidebarContainer--content_input">
-            <label>Amount</label>
+            <label>{t("eSidebar.amount")}</label>
             <input
               type="text"
               value={newExpense.value}

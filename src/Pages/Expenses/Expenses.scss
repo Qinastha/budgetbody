@@ -18,15 +18,20 @@
     display: flex;
     flex-direction: column;
     padding-right: 2rem;
+    border-radius: 15px;
     box-sizing: border-box;
+    max-height: 100%;
+    overflow: hidden;
 
     .addExpenseButton {
       cursor: pointer;
       color: white;
       padding-bottom: 2rem;
       border-radius: 4px;
+      font-size: 1.2rem;
       box-sizing: border-box;
       transition: all 0.3s ease-in-out;
+      width: 40%;
 
       &:hover {
         transform: translateX(10px);
@@ -36,11 +41,33 @@
 
     &_list {
       background-color: rgba(255, 255, 255, 0.4);
-      border-radius: 5%;
+      border-radius: 15px;
+      flex-grow: 1;
+      padding: 0.5rem;
+      box-sizing: border-box;
+      max-height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: #888 grey;
+
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #888;
+        border-radius: 15px
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
 
       &-item {
         padding: 0.5rem;
         box-sizing: border-box;
+        border-bottom: 1px solid green;
       }
     }
   }
@@ -51,13 +78,14 @@
     align-items: center;
     box-sizing: border-box;
     background-color: rgba(255, 255, 255, 0.4);
-    border-radius: 10%;
+    border-radius: 15px;
     width: 100%;
-    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
 
     h4 {
       margin: 0;
-      padding: 2rem 1rem;
+      padding: 1rem;
       box-sizing: border-box;
       text-align: center;
       font-size: 1.2rem;

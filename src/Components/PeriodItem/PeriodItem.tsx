@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import "./PeriodItem.scss";
 import { TimeResolution } from "../../core";
 
-export const PeriodItem: React.FC = () => {
-  const periods: TimeResolution[] = ["1m", "3m", "6m", "1y"];
-  const [activePeriod, setActivePeriod] = useState<TimeResolution>("1m");
+interface PeriodItemProps {
+  activePeriod: TimeResolution;
+  handlePeriodChange: (period: TimeResolution) => void;
+}
 
-  const handlePeriodChange = (period: TimeResolution) => {
-    setActivePeriod(period);
-  };
+export const PeriodItem: React.FC<PeriodItemProps> = ({
+  activePeriod,
+  handlePeriodChange,
+}) => {
+  const periods: TimeResolution[] = ["1m", "3m", "6m", "1y"];
 
   return (
     <div className="periodItemContainer">

@@ -9,10 +9,29 @@
     object-fit: contain;
   }
 
-  p {
-    margin: 0;
-    padding-top: 1rem;
-    box-sizing: border-box;
-    font-size: 1.2rem;
+  &__lowPart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+
+    p {
+      margin: 0;
+      font-size: 1.5rem;
+      padding-right: 0.5rem;
+      box-sizing: border-box;
+      word-break: break-word;
+    }
+
+    .material-symbols-outlined {
+      font-size: 1.5rem;
+      color: #4caf50;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        scale: 1.2;
+      }
+    }
   }
 }

@@ -1,33 +1,35 @@
 import React from "react";
 import "./DashboardItem.scss";
 import { useTranslation } from "react-i18next";
-import { IUser } from "../../core";
+import { ICurrency, IDashboardAnalytics, IUser } from "../../core";
 
 interface DashboardItemProps {
-  user: IUser;
+  dashboardAnalytics: IDashboardAnalytics;
+  userCurrency: ICurrency;
 }
 
-export const DashboardItem: React.FC<DashboardItemProps> = ({ user }) => {
+export const DashboardItem: React.FC<DashboardItemProps> = ({
+  dashboardAnalytics,
+  userCurrency,
+}) => {
   const { t } = useTranslation();
-  const userCurrentCurrency = user.applicationSettings.currency.code;
-  const userIncome = user.applicationSettings.monthIncome[userCurrentCurrency];
-  const userExpense =
-    user.analytics.expensesAnalytics.totalExpense[userCurrentCurrency];
+  const userIncome = dashboardAnalytics?.totalIncome[userCurrency.code];
+  const userExpense = dashboardAnalytics?.totalExpense[userCurrency.code];
   return (
     <div className="dashboardItemContainer">
       <div className="dashboardItemContainer--module">
         <h4>{t("dashboard.income")}</h4>
-        <p>{userIncome + userCurrentCurrency}</p>
+        <p>{userIncome + userCurrency?.symbol}</p>
       </div>
       <div className="dashboardItemContainer--module">
         <h4>{t("dashboard.expense")}</h4>
-        <p>{userExpense + userCurrentCurrency}</p>
+        <p>{userExpense + userCurrency?.symbol}</p>
       </div>
       <div className="dashboardItemContainer--module">
         <h4>{t("dashboard.saved")}</h4>
         <p>
           {userIncome - userExpense}
-          {userCurrentCurrency}
+          {userCurrency?.symbol}
         </p>
       </div>
     </div>
