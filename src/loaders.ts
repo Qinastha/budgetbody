@@ -8,6 +8,7 @@ export const userLoader = async () => {
 
   const state = getState();
   const user = getUser(state);
+  console.log(user);
 
   return user;
 };

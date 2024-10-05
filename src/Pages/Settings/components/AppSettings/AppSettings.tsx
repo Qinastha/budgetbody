@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   ApplicationSettingsForm,
+  handleOnlyNumbers,
   IApplicationSettings,
   ICurrency,
 } from "../../../../core";
@@ -8,8 +9,6 @@ import { useTranslation } from "react-i18next";
 import "./AppSettings.scss";
 import {
   allCurrencies,
-  defaultCurrency,
-  setUserCurrency,
   updateApplicationSettingsData,
 } from "../../../../store/userSlice";
 import { CustomButton } from "../../../../Components";
@@ -25,8 +24,9 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
-  const userCurrency: ICurrency =
-    applicationSettings?.currency ?? defaultCurrency;
+  const [userCurrency, setUserCurrency] = useState<ICurrency>(
+    applicationSettings.currency,
+  );
 
   const [appSettingsForm, setAppSettingsForm] =
     useState<ApplicationSettingsForm>({
@@ -40,33 +40,6 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
       theme: applicationSettings.theme,
       diagramLineType: applicationSettings.diagramLineType,
     });
-
-  useEffect(() => {
-    setAppSettingsForm({
-      monthIncome:
-        appSettingsForm.monthIncome ||
-        applicationSettings.monthIncome[userCurrency.code],
-      monthHealthcare:
-        appSettingsForm.monthHealthcare ||
-        applicationSettings.monthHealthcare[userCurrency.code],
-      monthTax:
-        appSettingsForm.monthTax ||
-        applicationSettings.monthTax[userCurrency.code],
-      monthHousing:
-        appSettingsForm.monthHousing ||
-        applicationSettings.monthHousing[userCurrency.code],
-      monthCredit:
-        appSettingsForm.monthCredit ||
-        applicationSettings.monthCredit[userCurrency.code],
-      monthOther:
-        appSettingsForm.monthOther ||
-        applicationSettings.monthOther[userCurrency.code],
-      currency: appSettingsForm.currency || applicationSettings.currency,
-      theme: appSettingsForm.theme || applicationSettings.theme,
-      diagramLineType:
-        appSettingsForm.diagramLineType || applicationSettings.diagramLineType,
-    });
-  }, [userCurrency]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -87,13 +60,20 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
       (currency: ICurrency) => currency.code === newCurrencyCode,
     );
     if (newCurrency) {
+      setUserCurrency(newCurrency);
       setAppSettingsForm((prevData: ApplicationSettingsForm) => {
         return {
           ...prevData,
           currency: newCurrency,
+          monthIncome: applicationSettings.monthIncome[newCurrency.code],
+          monthHealthcare:
+            applicationSettings.monthHealthcare[newCurrency.code],
+          monthTax: applicationSettings.monthTax[newCurrency.code],
+          monthHousing: applicationSettings.monthHousing[newCurrency.code],
+          monthCredit: applicationSettings.monthCredit[newCurrency.code],
+          monthOther: applicationSettings.monthOther[newCurrency.code],
         };
       });
-      dispatch(setUserCurrency(newCurrency));
     }
   };
 
@@ -117,8 +97,7 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
         result[key] = appSettingsForm[key];
       }
     });
-    // dispatch(updateApplicationSettingsData(appSettingsForm));
-    console.log(result);
+    dispatch(updateApplicationSettingsData(appSettingsForm));
   };
   return (
     <div className="appSettingsContainer">
@@ -133,6 +112,7 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
                 name="monthIncome"
                 value={appSettingsForm.monthIncome}
                 onChange={handleInputChange}
+                onKeyDown={handleOnlyNumbers}
               />
             </div>
             <div className="appSettingsContainer--inputs_item">
@@ -142,13 +122,14 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
                 name="monthHealthcare"
                 value={appSettingsForm.monthHealthcare}
                 onChange={handleInputChange}
+                onKeyDown={handleOnlyNumbers}
               />
             </div>
             <div className="appSettingsContainer--inputs_select">
               <label>{t("appSettings.currency")}</label>
               <select
                 name="currency"
-                value={appSettingsForm.currency?.code}
+                value={appSettingsForm.currency.code}
                 onChange={handleChangeCurrency}>
                 {allCurrencies.map(currency => (
                   <option key={currency.code} value={currency.code}>
@@ -164,6 +145,7 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
                 name="monthTax"
                 value={appSettingsForm.monthTax}
                 onChange={handleInputChange}
+                onKeyDown={handleOnlyNumbers}
               />
             </div>
             <div className="appSettingsContainer--inputs_item">
@@ -173,6 +155,7 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
                 name="monthHousing"
                 value={appSettingsForm.monthHousing}
                 onChange={handleInputChange}
+                onKeyDown={handleOnlyNumbers}
               />
             </div>
             <div className="appSettingsContainer--inputs_select">
@@ -196,6 +179,7 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
                 name="monthCredit"
                 value={appSettingsForm.monthCredit}
                 onChange={handleInputChange}
+                onKeyDown={handleOnlyNumbers}
               />
             </div>
             <div className="appSettingsContainer--inputs_item">
@@ -205,6 +189,7 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
                 name="monthOther"
                 value={appSettingsForm.monthOther}
                 onChange={handleInputChange}
+                onKeyDown={handleOnlyNumbers}
               />
             </div>
             <div className="appSettingsContainer--inputs_select">
@@ -221,7 +206,7 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
           </form>
           <div className="appSettingsContainer--button">
             <CustomButton
-              label={t("button.submit")}
+              label={t("button.update")}
               view={"white"}
               onClick={handleSubmit}
             />

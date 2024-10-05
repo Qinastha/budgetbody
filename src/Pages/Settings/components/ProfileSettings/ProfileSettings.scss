@@ -16,6 +16,7 @@
     grid-template-columns: repeat(2, 1fr);
     width: 100%;
     box-sizing: border-box;
+    align-items: center;
     gap: 1rem;
 
     &_item {
@@ -23,22 +24,13 @@
       flex-direction: column;
       box-sizing: border-box;
       width: 75%;
-
-      label {
-        padding: 0 0.2rem;
-        box-sizing: border-box;
-      }
-
-      input {
-        padding: 0.5rem;
-        box-sizing: border-box;
-      }
     }
   }
 
-  &--button {
+  &--buttons {
     display: flex;
     justify-content: end;
     align-items: center;
+    gap: 1rem;
   }
 }

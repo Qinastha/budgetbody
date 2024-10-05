@@ -1,5 +1,3 @@
-import { Theme } from "./theme";
-import { DiagramType } from "./diagramType";
 import { ICurrency } from "../interfaces";
 
 export type ApplicationSettingsForm = {
@@ -10,6 +8,6 @@ export type ApplicationSettingsForm = {
   monthCredit: number;
   monthOther: number;
   currency: ICurrency;
-  theme: Theme;
-  diagramLineType: DiagramType;
+  theme: string;
+  diagramLineType: string;
 };

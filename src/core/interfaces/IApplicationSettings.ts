@@ -1,6 +1,5 @@
 import { IFinances } from "./IFinances";
 import { ICurrency } from "./ICurrency";
-import { DiagramType, Theme } from "../types";
 
 export interface IApplicationSettings {
   monthIncome: IFinances;
@@ -10,6 +9,6 @@ export interface IApplicationSettings {
   monthCredit: IFinances;
   monthOther: IFinances;
   currency: ICurrency;
-  theme: Theme;
-  diagramLineType: DiagramType;
+  theme: string;
+  diagramLineType: string;
 }

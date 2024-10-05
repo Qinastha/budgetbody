@@ -3,20 +3,29 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 30%;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  width: 100%;
 
-  .expenseIteLeftPart,
-  .expenseIteRightPart {
+  .expenseItemLeftPart,
+  .expenseItemRightPart {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    padding: 10px;
-    box-sizing: border-box;
     align-items: center;
   }
 
+  .expenseItemLeftPart {
+    flex-basis: 70%;
+    justify-content: start;
+  }
+
+  .expenseItemRightPart {
+    flex-basis: 30%;
+    justify-content: end;
+  }
+
   .categoryLogo {
-    padding-right: 0.5rem;
+    padding-right: 1rem;
   }
 
   .spendSum {
