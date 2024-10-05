@@ -4,9 +4,11 @@
   flex-direction: column;
   padding: 1rem;
   box-sizing: border-box;
+  max-height: 100vh;
 
   h1 {
     color: green;
+    hyphens: auto;
   }
 
   &--delete {
@@ -29,5 +31,17 @@
   label {
     padding: 0 0.2rem;
     box-sizing: border-box;
+  }
+}
+
+@media (max-width: 768px) {
+  .settingsContainer {
+    overflow-y: auto;
+  }
+}
+
+@media (max-height: 450px) {
+  .settingsContainer {
+    overflow-y: auto;
   }
 }

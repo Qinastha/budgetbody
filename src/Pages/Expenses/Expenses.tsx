@@ -34,11 +34,11 @@ export const Expenses: React.FC = () => {
   return (
     <>
       <div className="expensesContainer">
+        <h1>{t("expenses.title")}</h1>
+        <div className="addExpenseButton" onClick={toggleSidebar}>
+          {t("expenses.add")}
+        </div>
         <div className="expensesContainer--left">
-          <h1>{t("expenses.title")}</h1>
-          <div className="addExpenseButton" onClick={toggleSidebar}>
-            {t("expenses.add")}
-          </div>
           {userExpenses.length > 0 ? (
             <div className="expensesContainer--left_list">
               {[...userExpenses]

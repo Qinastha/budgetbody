@@ -2,6 +2,7 @@
   width: 100vw;
   height: 100vh;
   position: relative;
+  overflow: hidden;
 
   .registerPage--header {
     width: 100%;
@@ -23,7 +24,9 @@
     width: 35%;
 
     h2 {
-      margin-top: 0;
+      margin: 0;
+      padding-bottom: 1rem;
+      box-sizing: border-box;
       text-align: center;
     }
 
@@ -53,19 +56,50 @@
         color: red;
         margin: 0;
       }
-
-      .formSplit {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        justify-content: space-around;
-        align-items: center;
-        gap: 1rem;
-      }
     }
 
     button {
       width: 60%;
       align-self: center;
+    }
+  }
+}
+
+@media (max-width: 1180px) {
+  .registerPageWrapper {
+    .registerContainer {
+      width: 70%;
+
+    }
+  }
+}
+
+@media (max-height: 450px) {
+  .registerPageWrapper {
+    .registerContainer {
+
+      .registerContainer--form {
+        gap: 0.5rem;
+
+        input {
+          padding: 0.5rem;
+        }
+      }
+
+      h2 {
+        padding-bottom: 0.5rem;
+      }
+
+      p {
+        margin: 0;
+        padding: 0.5rem;
+        box-sizing: border-box;
+      }
+
+      button {
+        margin-top: 0.5rem;
+        box-sizing: border-box;
+      }
     }
   }
 }

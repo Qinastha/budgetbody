@@ -11,9 +11,23 @@ export const Navbar: React.FC = () => {
     <div className="navbarContainer">
       <MiniProfile />
       <div className="navbarContainer--links">
-        <NavLink to="/"> {t("navbar.dashboard")} </NavLink>
-        <NavLink to="/expenses"> {t("navbar.expenses")} </NavLink>
-        <NavLink to="/settings"> {t("navbar.settings")} </NavLink>
+        <NavLink to="/">
+          {" "}
+          <span className="material-symbols-outlined">home</span>{" "}
+          <p>{t("navbar.dashboard")} </p>
+        </NavLink>
+        <NavLink to="/expenses">
+          {" "}
+          <span className="material-symbols-outlined">
+            account_balance_wallet
+          </span>
+          <p>{t("navbar.expenses")} </p>
+        </NavLink>
+        <NavLink to="/settings">
+          {" "}
+          <span className="material-symbols-outlined">settings</span>{" "}
+          <p>{t("navbar.settings")} </p>
+        </NavLink>
       </div>
       <div className="navbarContainer--languageSwitcher">
         <LanguageSwitcher />

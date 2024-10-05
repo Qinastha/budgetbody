@@ -1,43 +1,52 @@
 .expensesContainer {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: relative;
   display: grid;
-  grid-template-columns: minmax(70%, 1fr) 30%;
+  grid-template-columns: 70% 30%;
+  grid-template-rows: auto auto 1fr;
+  grid-template-areas:
+    "title right"
+    "addButton right"
+    "left right";
   padding: 1rem;
   box-sizing: border-box;
 
   h1 {
+    grid-area: title;
     margin: 0;
     text-align: center;
     padding-bottom: 1rem;
     box-sizing: border-box;
   }
 
+  .addExpenseButton {
+    grid-area: addButton;
+    cursor: pointer;
+    color: white;
+    padding-bottom: 2rem;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+    width: 40%;
+
+    &:hover {
+      transform: translateX(10px);
+      color: green;
+    }
+  }
+
   &--left {
+    grid-area: left;
     display: flex;
     flex-direction: column;
     padding-right: 2rem;
     border-radius: 15px;
     box-sizing: border-box;
     max-height: 100%;
+    flex-basis: 70%;
     overflow: hidden;
-
-    .addExpenseButton {
-      cursor: pointer;
-      color: white;
-      padding-bottom: 2rem;
-      border-radius: 4px;
-      font-size: 1.2rem;
-      box-sizing: border-box;
-      transition: all 0.3s ease-in-out;
-      width: 40%;
-
-      &:hover {
-        transform: translateX(10px);
-        color: green;
-      }
-    }
 
     &_list {
       background-color: rgba(255, 255, 255, 0.4);
@@ -73,6 +82,7 @@
   }
 
   &--right {
+    grid-area: right;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -82,6 +92,7 @@
     width: 100%;
     max-height: 100%;
     overflow: hidden;
+    flex-basis: 30%;
 
     h4 {
       margin: 0;
@@ -89,6 +100,48 @@
       box-sizing: border-box;
       text-align: center;
       font-size: 1.2rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .expensesContainer {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+      "title"
+      "addButton"
+      "right"
+      "left";
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: auto;
+    max-height: 100vh;
+    row-gap: 1rem;
+
+    h1 {
+      padding-bottom: 0;
+    }
+
+    .addExpenseButton {
+      width: 60%;
+      padding-bottom: 0;
+    }
+
+    &--left, &--right {
+      padding-right: 0;
+    }
+
+    &--left {
+      &_list {
+        [class^="material"] {
+          font-size: 1rem;
+        }
+
+        p {
+          font-size: 0.8rem;
+        }
+      }
     }
   }
 }
