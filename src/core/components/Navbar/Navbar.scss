@@ -29,6 +29,12 @@
     }
   }
 
+  &--languageSwitcher {
+    align-self: center;
+    padding-bottom: 1rem;
+    box-sizing: border-box;
+  }
+
   &:last-child {
     padding-bottom: 1rem;
     box-sizing: border-box;

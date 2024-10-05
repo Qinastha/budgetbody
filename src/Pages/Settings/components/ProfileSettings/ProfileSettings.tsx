@@ -1,30 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ProfileSettings.scss";
 import { useTranslation } from "react-i18next";
-import { GenderSelectItem } from "../../../../Components";
-import { SettingsForm } from "../../../../core";
+import { CustomButton, GenderSelectItem } from "../../../../Components";
+import { Gender, RegisterProfileForm } from "../../../../core";
+import { useAppDispatch } from "../../../../hooks";
+import { updateProfileData } from "../../../../store/userSlice";
 
 interface ProfileSettingsProps {
-  form: SettingsForm;
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  userName: string;
+  address: string;
+  dateOfBirth: string;
+  gender: Gender;
 }
 
 export const ProfileSettings: React.FC<ProfileSettingsProps> = ({
-  form,
-  handleInputChange,
+  userName,
+  address,
+  dateOfBirth,
+  gender,
 }) => {
+  const [profileForm, setProfileForm] = useState<Partial<RegisterProfileForm>>({
+    userName: userName ?? "",
+    address: address ?? "",
+    dateOfBirth: dateOfBirth ? dateOfBirth.split("T")[0] : "",
+    gender: gender ?? "",
+  });
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    const { name, value } = e.target;
+    setProfileForm({ ...profileForm, [name]: value });
+  };
+
+  const handleSubmit = () => {
+    dispatch(updateProfileData(profileForm));
+    console.log(profileForm);
+  };
   return (
     <div className="profileSettingsContainer">
       <h3>{t("profileSettings.title")}</h3>
-      <div className="profileSettingsContainer--inputs">
+      <form className="profileSettingsContainer--inputs">
         <div className="profileSettingsContainer--inputs_item">
           <label>{t("register.placeholder.userName")}</label>
           <input
             type="text"
             name="userName"
-            value={form.userName}
+            value={profileForm.userName}
             onChange={handleInputChange}
           />
         </div>
@@ -34,7 +59,7 @@ export const ProfileSettings: React.FC<ProfileSettingsProps> = ({
             type="date"
             name="dateOfBirth"
             max={`${currentYear}-12-31`}
-            value={form.dateOfBirth}
+            value={profileForm.dateOfBirth}
             onChange={handleInputChange}
           />
         </div>
@@ -43,12 +68,22 @@ export const ProfileSettings: React.FC<ProfileSettingsProps> = ({
           <input
             type="text"
             name="address"
-            value={form.address}
+            value={profileForm.address}
             onChange={handleInputChange}
           />
         </div>
 
-        <GenderSelectItem form={form} handleInputChange={handleInputChange} />
+        <GenderSelectItem
+          form={profileForm}
+          handleInputChange={handleInputChange}
+        />
+      </form>
+      <div className="profileSettingsContainer--button">
+        <CustomButton
+          label={t("button.submit")}
+          view={"white"}
+          onClick={handleSubmit}
+        />
       </div>
     </div>
   );

@@ -1,10 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
+  ApplicationSettingsForm,
   IAnalytics,
   IApplicationSettings,
   ICurrency,
   IFinances,
   IUser,
+  RegisterProfileForm,
 } from "../core";
 import axios from "axios";
 
@@ -19,6 +21,12 @@ export const defaultCurrency: ICurrency = {
   code: "USD",
   symbol: "$",
 };
+
+export const allCurrencies: ICurrency[] = [
+  { name: "US Dollar", code: "USD", symbol: "$" },
+  { name: "Euro", code: "EUR", symbol: "€" },
+  { name: "Ukrainian Hryvnia", code: "UAH", symbol: "₴" },
+];
 
 export const defaultExpenses = {
   monthHealthcare: zeroFinances,
@@ -96,12 +104,97 @@ export const fetchUserData = createAsyncThunk(
   },
 );
 
+export const updateProfileData = createAsyncThunk(
+  "userData/updateProfileData",
+  async (data: Partial<RegisterProfileForm>) => {
+    try {
+      const response = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/user/update-profile`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+      if (response.data.value) {
+        return response.data.value;
+      } else {
+        console.error("Failed to update user data");
+      }
+    } catch (err) {
+      throw err;
+    }
+  },
+);
+
+export const updateApplicationSettingsData = createAsyncThunk(
+  "userData/updateApplicationSettingsData",
+  async (data: ApplicationSettingsForm) => {
+    try {
+      const response = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/user/update-application`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+      if (response.data.value) {
+        console.log(response.data.value);
+        return response.data.value;
+      } else {
+        console.error("Failed to update application settings");
+      }
+    } catch (err) {
+      throw err;
+    }
+  },
+);
+
+export const deleteUserProfile = createAsyncThunk(
+  "userData/deleteUserProfile",
+  async () => {
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/user`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+      if (response.status == 204) {
+        localStorage.removeItem("token");
+        return response.data;
+      } else {
+        console.error("Failed to delete user profile");
+      }
+    } catch (err) {
+      throw err;
+    }
+  },
+);
+
 export const user = createSlice({
   name: "user",
   initialState,
   reducers: {
     setUserAvatar: (state, action: PayloadAction<string>) => {
       return { ...state, avatar: action.payload };
+    },
+    setUserCurrency: (state, action: PayloadAction<ICurrency>) => {
+      return {
+        ...state,
+        applicationSettings: {
+          ...state.applicationSettings,
+          currency: action.payload,
+        },
+      };
     },
   },
   selectors: {
@@ -118,10 +211,37 @@ export const user = createSlice({
         };
       },
     );
+    builder.addCase(
+      updateProfileData.fulfilled,
+      (state, action: PayloadAction<IUser>) => {
+        return {
+          ...state,
+          userName: action.payload.userName,
+          gender: action.payload.gender,
+          dateOfBirth: action.payload.dateOfBirth,
+          address: action.payload.address,
+        };
+      },
+    );
+    builder.addCase(
+      updateApplicationSettingsData.fulfilled,
+      (state, action: PayloadAction<IUser>) => {
+        return {
+          ...state,
+          applicationSettings: {
+            ...state.applicationSettings,
+            ...action.payload.applicationSettings,
+          },
+        };
+      },
+    );
+    builder.addCase(deleteUserProfile.fulfilled, state => {
+      return initialState;
+    });
   },
 });
 
-export const { setUserAvatar } = user.actions;
+export const { setUserAvatar, setUserCurrency } = user.actions;
 
 export const { getUser, getUserAvatar } = user.selectors;
 
