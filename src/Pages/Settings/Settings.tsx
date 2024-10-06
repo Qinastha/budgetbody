@@ -3,6 +3,7 @@ import "./Settings.scss";
 import { ProfileSettings } from "./components/ProfileSettings/ProfileSettings";
 import { useTranslation } from "react-i18next";
 import { AppSettings } from "./components/AppSettings/AppSettings";
+import { CustomButton } from "../../Components";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { deleteUserProfile, getUser } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";

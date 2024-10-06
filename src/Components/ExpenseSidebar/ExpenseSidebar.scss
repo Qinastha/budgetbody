@@ -40,15 +40,12 @@
     align-items: center;
     width: 100%;
     height: 80%;
-    flex-grow: 1;
 
     h2 {
       margin: 0;
       padding: 4rem 1rem;
       font-size: 1.5rem;
       box-sizing: border-box;
-      text-align: center;
-      hyphens: auto;
     }
 
     &_list {
@@ -93,34 +90,6 @@
         border: none;
         background-color: inherit;
         border-bottom: 1px solid black;
-      }
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .sidebarContainer {
-    right: -70vw;
-    width: 65vw;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1180px) {
-  .sidebarContainer {
-    right: -50vw;
-    width: 45vw;
-  }
-}
-
-@media (max-height: 450px) {
-  .sidebarContainer {
-    &--content {
-      h2 {
-        padding: 1.5rem;
-      }
-
-      &_input {
-        padding-bottom: 4rem;
       }
     }
   }

@@ -74,25 +74,27 @@ export const Register: React.FC = () => {
             <p className="error-message">{t("error.address")}</p>
           )}
 
-          <input
-            type="date"
-            name="dateOfBirth"
-            placeholder={t("register.placeholder.dob")}
-            value={registerForm.dateOfBirth}
-            onChange={handleInputChange}
-            className={errors.dateOfBirth ? "error-border" : ""}
-            max={`${currentYear}-12-31`}
-            required={true}
-          />
-          {errors.dateOfBirth && (
-            <p className="error-message">
-              {t("error.dobOutOfDate")} {currentYear}
-            </p>
-          )}
-          <GenderSelectItem
-            form={registerForm}
-            handleInputChange={handleInputChange}
-          />
+          <div className="formSplit">
+            <input
+              type="date"
+              name="dateOfBirth"
+              placeholder={t("register.placeholder.dob")}
+              value={registerForm.dateOfBirth}
+              onChange={handleInputChange}
+              className={errors.dateOfBirth ? "error-border" : ""}
+              max={`${currentYear}-12-31`}
+              required={true}
+            />
+            {errors.dateOfBirth && (
+              <p className="error-message">
+                {t("error.dobOutOfDate")} {currentYear}
+              </p>
+            )}
+            <GenderSelectItem
+              form={registerForm}
+              handleInputChange={handleInputChange}
+            />
+          </div>
         </form>
         <p>
           {t("register.alreadyHaveAccount")}{" "}

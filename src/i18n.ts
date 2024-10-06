@@ -144,7 +144,7 @@ const resources = {
       "expenses.title": "Витрати",
       "expenses.add": "Додати витрату",
       "expenses.none": "Немає витрат. Додайте свою першу",
-      "expenses.where": "Куди йдуть гроші",
+      "expenses.where": "Куди йдут гроші",
       "expense.healthcare": "Охорона здоров'я",
       "expense.monthTax": "Податки",
       "expense.housing": "Житло",
