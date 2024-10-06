@@ -20,7 +20,7 @@
       font-size: 1.5rem;
       padding-right: 0.5rem;
       box-sizing: border-box;
-      word-break: break-word;
+      hyphens: auto;
     }
 
     .material-symbols-outlined {
@@ -31,6 +31,36 @@
 
       &:hover {
         scale: 1.2;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .miniProfileContainer {
+    img {
+      width: 4rem;
+    }
+
+    &__lowPart {
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+@media (max-height: 450px) {
+  .miniProfileContainer {
+    padding-top: 0.5rem;
+
+    img {
+      width: 3.5em;
+    }
+
+    &__lowPart {
+      p {
+        font-size: 0.9rem;
       }
     }
   }

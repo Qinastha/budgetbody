@@ -9,6 +9,7 @@
     width: 100%;
     text-align: start;
     border-bottom: 1px solid green;
+    hyphens: auto;
   }
 
   &--inputs {
@@ -32,5 +33,23 @@
     justify-content: end;
     align-items: center;
     gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .profileSettingsContainer {
+
+    &--inputs {
+      grid-template-columns: 1fr;
+
+      &_item {
+        width: 100%;
+      }
+    }
+
+    &--buttons {
+      padding-top: 1rem;
+      box-sizing: border-box;
+    }
   }
 }

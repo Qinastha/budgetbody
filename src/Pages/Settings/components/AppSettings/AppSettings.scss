@@ -9,6 +9,7 @@
     width: 100%;
     text-align: start;
     border-bottom: 1px solid green;
+    hyphens: auto;
   }
 
   &--inputs {
@@ -44,5 +45,26 @@
     display: flex;
     justify-content: end;
     align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .appSettingsContainer {
+    &--inputs {
+      grid-template-columns: 1fr;
+
+      &_item {
+        width: 100%;
+      }
+
+      &_select {
+        width: 100%;
+      }
+    }
+
+    &--button {
+      padding-top: 1rem;
+      box-sizing: border-box;
+    }
   }
 }
