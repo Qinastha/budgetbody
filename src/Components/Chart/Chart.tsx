@@ -10,10 +10,10 @@ interface ChartProps {
 }
 
 export const Chart: React.FC<ChartProps> = ({
-                                              activePeriod,
-                                              dashboardAnalytics,
-                                              userCurrency,
-                                            }) => {
+  activePeriod,
+  dashboardAnalytics,
+  userCurrency,
+}) => {
   const { t } = useTranslation();
   const getChartOptions = () => {
     const data = dashboardAnalytics?.diagramData?.series[0]?.data;
@@ -45,32 +45,32 @@ export const Chart: React.FC<ChartProps> = ({
     const startTime = now - periodMilliseconds;
 
     const seriesData = data
-        .map((item: any) => {
-          const [timestamp, values] = item;
-          if (timestamp < startTime) {
-            return null;
-          }
-          const amount = values[userCurrency.code];
-          if (amount === undefined) {
-            console.error(
-                `Currency ${userCurrency.code} not found in data point`,
-                values,
-            );
-            return null;
-          }
-          return [timestamp, amount];
-        })
-        .filter(Boolean);
+      .map((item: any) => {
+        const [timestamp, values] = item;
+        if (timestamp < startTime) {
+          return null;
+        }
+        const amount = values[userCurrency.code];
+        if (amount === undefined) {
+          console.error(
+            `Currency ${userCurrency.code} not found in data point`,
+            values,
+          );
+          return null;
+        }
+        return [timestamp, amount];
+      })
+      .filter(Boolean);
 
     seriesData.sort((a: any, b: any) => a[0] - b[0]);
 
     const options = {
       grid: {
-        backgroundColor: 'transparent'
+        backgroundColor: "transparent",
       },
       xAxis: {
         type: "time",
-        name: 'Date',
+        name: "Date",
         axisLabel: {
           formatter: (value: number) => new Date(value).toLocaleDateString(),
           rotate: 45,
@@ -79,32 +79,32 @@ export const Chart: React.FC<ChartProps> = ({
         axisLine: {
           show: true,
           lineStyle: {
-            color: '#fff',
-            width: 2
-          }
+            color: "#fff",
+            width: 2,
+          },
         },
         splitLine: {
-          show: false
-        }
+          show: false,
+        },
       },
       yAxis: {
         type: "value",
         show: true,
         name: userCurrency.symbol,
-        position: 'left',
+        position: "left",
         axisLabel: {
           formatter: (value: number) => value.toFixed(0),
         },
         axisLine: {
           show: true,
           lineStyle: {
-            color: '#fff',
-            width: 2
-          }
+            color: "#fff",
+            width: 2,
+          },
         },
         splitLine: {
-          show: false
-        }
+          show: false,
+        },
       },
       tooltip: {
         trigger: "axis",
@@ -121,10 +121,10 @@ export const Chart: React.FC<ChartProps> = ({
           name: "Savings",
           data: seriesData,
           type: dashboardAnalytics.diagramData.series[0].type ?? "line",
-          areaStyle:dashboardAnalytics.diagramData.series[0].areaStyle ??  {
-            opacity: 0
+          areaStyle: dashboardAnalytics.diagramData.series[0].areaStyle ?? {
+            opacity: 0,
           },
-          yAxisIndex:0,
+          yAxisIndex: 0,
           smooth: true,
           lineStyle: {
             width: 2,
@@ -137,7 +137,9 @@ export const Chart: React.FC<ChartProps> = ({
         },
       ],
       title: {
-        text: t(dashboardAnalytics.diagramData.title.text ?? "lineChart.title"),
+        text: t(
+          dashboardAnalytics?.diagramData?.title?.text ?? "lineChart.title",
+        ),
         left: "center",
       },
     };
@@ -148,15 +150,15 @@ export const Chart: React.FC<ChartProps> = ({
   const options = getChartOptions();
 
   return (
-      <div className="dashboardChart">
-        <ReactECharts
-            option={options}
-            style={{
-              height: "50vh",
-              width: "70vw",
-              margin: "0 auto",
-            }}
-        />
-      </div>
+    <div className="dashboardChart">
+      <ReactECharts
+        option={options}
+        style={{
+          height: "50vh",
+          width: "70vw",
+          margin: "0 auto",
+        }}
+      />
+    </div>
   );
 };

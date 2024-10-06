@@ -80,6 +80,9 @@ const resources = {
       "navbar.settings": "Settings",
       "dashboard.title": "Dashboard",
       "lineChart.title": "Saved Over Time",
+      "lineChart.title.income": "Incomes Over Time",
+      "lineChart.title.expense": "Expenses Over Time",
+      "lineChart.title.save": "Saved Over Time",
     },
   },
   ua: {
@@ -161,6 +164,9 @@ const resources = {
       "navbar.settings": "Налаштування",
       "dashboard.title": "Панель контролю",
       "lineChart.title": "Збережено за місяць",
+      "lineChart.title.income": "Отримано за певний час",
+      "lineChart.title.expense": "Витрачено за певний час",
+      "lineChart.title.save": "Збережено за певний час",
     },
   },
 };

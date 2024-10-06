@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "./Expenses.scss";
-import {useAppDispatch, useAppSelector} from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import {
   getExpensesActivePeriod,
   getExpenseAnalytics,
   getUserCurrency,
-  getUserExpenses, handleTimeResolution,
+  getUserExpenses,
+  handleTimeResolution,
 } from "../../store/userSlice";
 import { ITimeSeries, TimeResolution } from "../../core";
 import {
@@ -22,7 +23,7 @@ export const Expenses: React.FC = () => {
   const userCurrency = useAppSelector(getUserCurrency);
   const analyticExpense = useAppSelector(getExpenseAnalytics);
   const dispatch = useAppDispatch();
-  const activePeriod = useAppSelector(getExpensesActivePeriod)
+  const activePeriod = useAppSelector(getExpensesActivePeriod);
   const [isSidebarVisible, setIsSidebarVisible] = useState<boolean>(false);
 
   const toggleSidebar = () => {
@@ -30,7 +31,12 @@ export const Expenses: React.FC = () => {
   };
 
   const handlePeriodChange = (timeResolution: TimeResolution) => {
-    dispatch (handleTimeResolution({analyticsType: 'expensesAnalytics',timeResolution }))
+    dispatch(
+      handleTimeResolution({
+        analyticsType: "expensesAnalytics",
+        timeResolution,
+      }),
+    );
   };
 
   return (
@@ -42,45 +48,45 @@ export const Expenses: React.FC = () => {
         </div>
         <div className="expensesContainer--left">
           {userExpenses.length > 0 ? (
-              <div className="expensesContainer--left_list">
-                {[...userExpenses]
-                    .sort(
-                        (a, b) =>
-                            new Date(b.timestamp).getTime() -
-                            new Date(a.timestamp).getTime(),
-                    )
-                    .map((expense: ITimeSeries) => (
-                        <div
-                            className="expensesContainer--left_list-item"
-                            key={expense._id}>
-                          <ExpenseItem
-                              expense={expense}
-                              userCurrency={userCurrency}
-                          />
-                        </div>
-                    ))}
-              </div>
+            <div className="expensesContainer--left_list">
+              {[...userExpenses]
+                .sort(
+                  (a, b) =>
+                    new Date(b.timestamp).getTime() -
+                    new Date(a.timestamp).getTime(),
+                )
+                .map((expense: ITimeSeries) => (
+                  <div
+                    className="expensesContainer--left_list-item"
+                    key={expense._id}>
+                    <ExpenseItem
+                      expense={expense}
+                      userCurrency={userCurrency}
+                    />
+                  </div>
+                ))}
+            </div>
           ) : (
-              <div>{t("expenses.none")}</div>
+            <div>{t("expenses.none")}</div>
           )}
         </div>
-          <div className="expensesContainer--right">
-            <PeriodItem
-                activePeriod={activePeriod}
-                handlePeriodChange={handlePeriodChange}
-            />
-            <h4>{t("expenses.where")}:</h4>
-            <CustomProgressItem
-                userCurrency={userCurrency}
-                analyticExpense={analyticExpense}
-            />
-          </div>
+        <div className="expensesContainer--right">
+          <PeriodItem
+            activePeriod={activePeriod}
+            handlePeriodChange={handlePeriodChange}
+          />
+          <h4>{t("expenses.where")}:</h4>
+          <CustomProgressItem
+            userCurrency={userCurrency}
+            analyticExpense={analyticExpense}
+          />
         </div>
+      </div>
 
-        <ExpenseSidebar
-            isSidebarVisible={isSidebarVisible}
-            toggleSidebar={toggleSidebar}
-        />
-      </>
+      <ExpenseSidebar
+        isSidebarVisible={isSidebarVisible}
+        toggleSidebar={toggleSidebar}
+      />
+    </>
   );
 };

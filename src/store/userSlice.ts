@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
-  ApplicationSettingsForm, DashboardCalculations,
+  ApplicationSettingsForm,
+  DashboardCalculations,
   IAnalytics,
   IApplicationSettings,
   ICurrency,
@@ -84,207 +85,206 @@ const initialState: IUser = {
 };
 
 export const fetchUserData = createAsyncThunk(
-    "userData/getUserData",
-    async () => {
-      try {
-        const response = await axios.get(
-            `${process.env.REACT_APP_BASE_URL}/user`,
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
-            },
-        );
-        if (response.data.value) {
-          return response.data.value;
-        } else {
-          console.error("Failed to fetch user data");
-        }
-      } catch (err) {
-        throw err;
+  "userData/getUserData",
+  async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/user`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+      if (response.data.value) {
+        return response.data.value;
+      } else {
+        console.error("Failed to fetch user data");
       }
-    },
+    } catch (err) {
+      throw err;
+    }
+  },
 );
 
 export const updateProfileData = createAsyncThunk(
-    "userData/updateProfileData",
-    async (data: Omit<RegisterProfileForm, "email" | "password">) => {
-      try {
-        const response = await axios.put(
-            `${process.env.REACT_APP_BASE_URL}/user/update-profile`,
-            data,
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
-            },
-        );
-        if (response?.data?.value) {
-          return response.data.value;
-        } else {
-          console.error("Failed to update user data");
-        }
-      } catch (err) {
-        throw err;
+  "userData/updateProfileData",
+  async (data: Omit<RegisterProfileForm, "email" | "password">) => {
+    try {
+      const response = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/user/update-profile`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+      if (response?.data?.value) {
+        return response.data.value;
+      } else {
+        console.error("Failed to update user data");
       }
-    },
+    } catch (err) {
+      throw err;
+    }
+  },
 );
 
 export const updateApplicationSettingsData = createAsyncThunk(
-    "userData/updateApplicationSettingsData",
-    async (data: ApplicationSettingsForm) => {
-      try {
-        const response = await axios.put(
-            `${process.env.REACT_APP_BASE_URL}/user/update-application`,
-            data,
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
-            },
-        );
-        if (response?.data?.value) {
-          return response.data.value;
-        } else {
-          console.error("Failed to update application settings");
-        }
-      } catch (err) {
-        throw err;
+  "userData/updateApplicationSettingsData",
+  async (data: ApplicationSettingsForm) => {
+    try {
+      const response = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/user/update-application`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+      if (response?.data?.value) {
+        return response.data.value;
+      } else {
+        console.error("Failed to update application settings");
       }
-    },
+    } catch (err) {
+      throw err;
+    }
+  },
 );
 
 export const deleteUserProfile = createAsyncThunk(
-    "userData/deleteUserProfile",
-    async () => {
-      try {
-        const response = await axios.delete(
-            `${process.env.REACT_APP_BASE_URL}/user`,
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
-            },
-        );
-        if (response.status === 204) {
-          localStorage.removeItem("token");
-          return response.data;
-        } else {
-          console.error("Failed to delete user profile");
-        }
-      } catch (err) {
-        throw err;
+  "userData/deleteUserProfile",
+  async () => {
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/user`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+      if (response.status === 204) {
+        localStorage.removeItem("token");
+        return response.data;
+      } else {
+        console.error("Failed to delete user profile");
       }
-    },
+    } catch (err) {
+      throw err;
+    }
+  },
 );
 
 export const handleAddExpense = createAsyncThunk(
-    "userData/handleAddExpense",
-    async (data: newExpenseForm) => {
-      try {
-        const response = await axios.post(
-            `${process.env.REACT_APP_BASE_URL}/time-series/create-expense`,
-            data,
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
-            },
-        );
-        if (response.data?.value) {
-          return response.data.value;
-        }
-      } catch (err) {
-        console.error(err);
+  "userData/handleAddExpense",
+  async (data: newExpenseForm) => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/time-series/create-expense`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+      if (response.data?.value) {
+        return response.data.value;
       }
-    },
+    } catch (err) {
+      console.error(err);
+    }
+  },
 );
 
 export const handleDeleteExpense = createAsyncThunk(
-    "userData/handleDeleteExpense",
-    async (expenseId: string) => {
-      const headers = {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      };
-      try {
-        const response = await axios.delete(
-            `${process.env.REACT_APP_BASE_URL}/time-series/delete-expense/${expenseId}`,
-            { headers },
+  "userData/handleDeleteExpense",
+  async (expenseId: string) => {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    };
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/time-series/delete-expense/${expenseId}`,
+        { headers },
+      );
+      if (response.status === 204) {
+        const userResponse = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/user`,
+          { headers },
         );
-        if (response.status === 204) {
-          const userResponse = await axios.get(
-              `${process.env.REACT_APP_BASE_URL}/user`,
-              { headers },
-          );
-          if (userResponse.data.value) {
-            return userResponse.data.value;
-          } else {
-            console.error("Failed to fetch user data");
-          }
+        if (userResponse.data.value) {
+          return userResponse.data.value;
         } else {
-          console.error("Failed to delete expense");
+          console.error("Failed to fetch user data");
         }
-      } catch (err) {
-        console.error(err);
+      } else {
+        console.error("Failed to delete expense");
       }
-    },
+    } catch (err) {
+      console.error(err);
+    }
+  },
 );
 
 export const handleCalculationFunction = createAsyncThunk(
-    "userData/handleCalculationFunction",
-    async (selectedCalculation: DashboardCalculations) => {
-      const headers = {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      };
-      try {
-        const response = await axios.put(
-            `${process.env.REACT_APP_BASE_URL}/analytics/dashboard-calculation`,
-            {
-              selectedCalculation
-            },
-            { headers },
-        );
-        if (response.data?.value) {
-          return response.data.value;
-        }
-      } catch (err) {
-        console.error(err);
+  "userData/handleCalculationFunction",
+  async (selectedCalculation: DashboardCalculations) => {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    };
+    try {
+      const response = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/analytics/dashboard-calculation`,
+        {
+          selectedCalculation,
+        },
+        { headers },
+      );
+      if (response.data?.value) {
+        return response.data.value;
       }
-    },
+    } catch (err) {
+      console.error(err);
+    }
+  },
 );
 
 export const handleTimeResolution = createAsyncThunk(
-    "userData/handleTimeResolution",
-    async (timeResolutionData: any) => {
-      const { analyticsType, timeResolution } = timeResolutionData;
-      const headers = {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      };
-      try {
-        const response = await axios.put(
-            `${process.env.REACT_APP_BASE_URL}/analytics/time-resolution/${analyticsType}`,
-            {
-              timeResolution
-            },
-            { headers },
-        );
-        if (response.data?.value) {
-          return response.data.value;
-        }
-      } catch (err) {
-        console.error(err);
+  "userData/handleTimeResolution",
+  async (timeResolutionData: any) => {
+    const { analyticsType, timeResolution } = timeResolutionData;
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    };
+    try {
+      const response = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/analytics/time-resolution/${analyticsType}`,
+        {
+          timeResolution,
+        },
+        { headers },
+      );
+      if (response.data?.value) {
+        return response.data.value;
       }
-    },
+    } catch (err) {
+      console.error(err);
+    }
+  },
 );
-
 
 export const user = createSlice({
   name: "user",
@@ -302,78 +302,80 @@ export const user = createSlice({
     getExpenseAnalytics: state => state.analytics.expensesAnalytics,
     getDashboardAnalytics: state => state.analytics.dashboardAnalytics,
     getDiagramType: state => state.applicationSettings.diagramLineType,
-    getDashboardActivePeriod: state => state.analytics.dashboardAnalytics.timeResolution,
-    getExpensesActivePeriod: state => state.analytics.expensesAnalytics.timeResolution
+    getDashboardActivePeriod: state =>
+      state.analytics.dashboardAnalytics.timeResolution,
+    getExpensesActivePeriod: state =>
+      state.analytics.expensesAnalytics.timeResolution,
   },
   extraReducers: builder => {
     builder.addCase(
-        fetchUserData.fulfilled,
-        (state, action: PayloadAction<IUser>) => {
-          return {
-            ...state,
-            ...action.payload,
-          };
-        },
+      fetchUserData.fulfilled,
+      (state, action: PayloadAction<IUser>) => {
+        return {
+          ...state,
+          ...action.payload,
+        };
+      },
     );
     builder.addCase(
-        updateProfileData.fulfilled,
-        (state, action: PayloadAction<IUser>) => {
-          return {
-            ...state,
-            userName: action.payload.userName,
-            gender: action.payload.gender,
-            dateOfBirth: action.payload.dateOfBirth,
-            address: action.payload.address,
-          };
-        },
+      updateProfileData.fulfilled,
+      (state, action: PayloadAction<IUser>) => {
+        return {
+          ...state,
+          userName: action.payload.userName,
+          gender: action.payload.gender,
+          dateOfBirth: action.payload.dateOfBirth,
+          address: action.payload.address,
+        };
+      },
     );
     builder.addCase(
-        updateApplicationSettingsData.fulfilled,
-        (state, action: PayloadAction<IUser>) => {
-          return {
-            ...state,
-            ...action.payload,
-          };
-        },
+      updateApplicationSettingsData.fulfilled,
+      (state, action: PayloadAction<IUser>) => {
+        return {
+          ...state,
+          ...action.payload,
+        };
+      },
     );
     builder.addCase(deleteUserProfile.fulfilled, state => {
       return initialState;
     });
     builder.addCase(
-        handleAddExpense.fulfilled,
-        (state, action: PayloadAction<IUser>) => {
-          return {
-            ...state,
-            ...action.payload,
-          };
-        },
+      handleAddExpense.fulfilled,
+      (state, action: PayloadAction<IUser>) => {
+        return {
+          ...state,
+          ...action.payload,
+        };
+      },
     );
     builder.addCase(
-        handleDeleteExpense.fulfilled,
-        (state, action: PayloadAction<IUser>) => {
-          return {
-            ...state,
-            ...action.payload,
-          };
-        },
+      handleDeleteExpense.fulfilled,
+      (state, action: PayloadAction<IUser>) => {
+        return {
+          ...state,
+          ...action.payload,
+        };
+      },
     );
     builder.addCase(
-        handleCalculationFunction.fulfilled,
-        (state,action: PayloadAction<IUser>) => {
-          return {
-            ...state,
-            ...action.payload
-          }
-        }
+      handleCalculationFunction.fulfilled,
+      (state, action: PayloadAction<IUser>) => {
+        return {
+          ...state,
+          ...action.payload,
+        };
+      },
     );
     builder.addCase(
-        handleTimeResolution.fulfilled,
-        (state,action: PayloadAction<IUser>) => {
-          return {
-            ...state,
-            ...action.payload
-          }
-        }
+      handleTimeResolution.fulfilled,
+      (state, action: PayloadAction<IUser>) => {
+        return {
+          ...state,
+          ...action.payload,
+        };
+      },
     );
   },
 });
