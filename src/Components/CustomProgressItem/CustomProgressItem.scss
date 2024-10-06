@@ -4,8 +4,6 @@
   padding-bottom: 1rem;
   box-sizing: border-box;
   width: 90%;
-  overflow-y: hidden;
-  overflow-x: hidden;
 
   &--item {
     padding-bottom: 1rem;
@@ -39,25 +37,6 @@
       overflow: hidden;
       border-radius: 15px;
       box-sizing: border-box;
-    }
-  }
-}
-
-@media (max-height: 450px) {
-  .progressItemContainer {
-    max-height: 100vh;
-    overflow-y: auto;
-
-    &--item {
-      &_header {
-        h5 {
-          font-size: 0.8rem;
-        }
-
-        p {
-          font-size: 0.7rem;
-        }
-      }
     }
   }
 }

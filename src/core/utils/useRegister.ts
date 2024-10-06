@@ -44,7 +44,7 @@ export const useRegister = () => {
       isValid = false;
     }
 
-    if (!registerForm.password) {
+    if (registerForm.password) {
       if (!passwordRegex.test(registerForm.password)) {
         newErrors.password = t("error.password");
         isValid = false;
