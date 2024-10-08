@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Dashboard.scss";
 import { Chart, DashboardItem, PeriodItem } from "../../Components";
 import { useAppDispatch, useAppSelector } from "../../hooks";
@@ -6,6 +6,7 @@ import {
   getDashboardActivePeriod,
   getDashboardAnalytics,
   getUserCurrency,
+  getUserTheme,
   handleCalculationFunction,
   handleTimeResolution,
 } from "../../store/userSlice";
@@ -17,7 +18,42 @@ export const Dashboard: React.FC = () => {
   const dashboardAnalytics = useAppSelector(getDashboardAnalytics);
   const userCurrency = useAppSelector(getUserCurrency);
   const activePeriod = useAppSelector(getDashboardActivePeriod);
+  const theme = useAppSelector(getUserTheme);
   const dispatch = useAppDispatch();
+
+  const [viewportWidth, setViewportWidth] = useState<number>(window.innerWidth);
+  const [viewportHeight, setViewportHeight] = useState<number>(
+    window.innerHeight,
+  );
+  const [isPortraitMobile, setIsPortraitMobile] = useState<boolean>(false);
+
+  const checkPortraitMobile = () => {
+    const isPortrait = window.screen.orientation
+      ? window.screen.orientation.type.startsWith("portrait")
+      : viewportWidth < 500;
+
+    setIsPortraitMobile(isPortrait);
+  };
+
+  useEffect(() => {
+    checkPortraitMobile();
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth);
+      setViewportHeight(window.innerHeight);
+    };
+
+    const handleOrientationChange = () => {
+      checkPortraitMobile();
+    };
+
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", handleOrientationChange);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleOrientationChange);
+    };
+  }, []);
 
   const handlePeriodChange = (timeResolution: TimeResolution) => {
     dispatch(
@@ -48,14 +84,23 @@ export const Dashboard: React.FC = () => {
           selectCalculation={submitCalculationFunction}
         />
       </div>
-      <div className="dashboardContainer--widget">
-        {/*{diagramType === "line"}*/}
-        <Chart
-          activePeriod={activePeriod}
-          dashboardAnalytics={dashboardAnalytics}
-          userCurrency={userCurrency}
-        />
-      </div>
+      {!isPortraitMobile ? (
+        <div className="dashboardContainer--widget">
+          <Chart
+            activePeriod={activePeriod}
+            dashboardAnalytics={dashboardAnalytics}
+            userCurrency={userCurrency}
+            theme={theme}
+            viewportWidth={viewportWidth}
+            viewportHeight={viewportHeight}
+          />
+        </div>
+      ) : (
+        <div className="dashboardContainer--phone_widget">
+          <span className="material-symbols-outlined">screen_rotation</span>
+          <p>Please rotate your device</p>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,3 +1,5 @@
+@import "../../assets/styles/variables";
+
 .dashboardItemContainer {
   display: flex;
   flex-direction: row;
@@ -13,7 +15,6 @@
     flex-direction: column;
     flex-basis: 25%;
     border-radius: 40px;
-    background: green;
 
     h4 {
       margin: 0;
@@ -26,6 +27,19 @@
       padding: 0.5rem;
       box-sizing: border-box;
       align-self: center;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboardItemContainer {
+    flex-direction: column;
+    row-gap: 1rem;
+
+    &--module {
+      flex-basis: 100%;
+      width: 100%;
+      max-width: 60vw;
     }
   }
 }

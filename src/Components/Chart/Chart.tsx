@@ -7,12 +7,18 @@ interface ChartProps {
   activePeriod: TimeResolution;
   dashboardAnalytics: IDashboardAnalytics;
   userCurrency: ICurrency;
+  theme: string;
+  viewportWidth: number;
+  viewportHeight: number;
 }
 
 export const Chart: React.FC<ChartProps> = ({
   activePeriod,
   dashboardAnalytics,
   userCurrency,
+  theme,
+  viewportWidth,
+  viewportHeight,
 }) => {
   const { t } = useTranslation();
   const getChartOptions = () => {
@@ -75,11 +81,13 @@ export const Chart: React.FC<ChartProps> = ({
           formatter: (value: number) => new Date(value).toLocaleDateString(),
           rotate: 45,
           interval: "auto",
+          color: theme === "orange-black" ? "#FFFFFF" : "#212121",
+          show: true,
         },
         axisLine: {
           show: true,
           lineStyle: {
-            color: "#fff",
+            color: theme === "orange-black" ? "#FFFFFF" : "#212121",
             width: 2,
           },
         },
@@ -94,11 +102,13 @@ export const Chart: React.FC<ChartProps> = ({
         position: "left",
         axisLabel: {
           formatter: (value: number) => value.toFixed(0),
+          color: theme === "orange-black" ? "#FFFFFF" : "#212121",
+          show: true,
         },
         axisLine: {
           show: true,
           lineStyle: {
-            color: "#fff",
+            color: theme === "orange-black" ? "#FFFFFF" : "#212121",
             width: 2,
           },
         },
@@ -131,8 +141,8 @@ export const Chart: React.FC<ChartProps> = ({
           },
           showSymbol: false,
           itemStyle: {
-            color: "green",
             opacity: 0.8,
+            color: theme === "orange-black" ? "#F37335" : "#005AA7",
           },
         },
       ],
@@ -141,6 +151,11 @@ export const Chart: React.FC<ChartProps> = ({
           dashboardAnalytics?.diagramData?.title?.text ?? "lineChart.title",
         ),
         left: "center",
+        textStyle: {
+          fontSize: viewportWidth > 1080 ? "28px" : "20px",
+          fontWeight: "bold",
+          color: theme === "orange-black" ? "#FFFFFF" : "#212121",
+        },
       },
     };
 
@@ -154,8 +169,13 @@ export const Chart: React.FC<ChartProps> = ({
       <ReactECharts
         option={options}
         style={{
-          height: "50vh",
-          width: "70vw",
+          height:
+            viewportHeight < 500
+              ? "80vh"
+              : viewportHeight < 840
+                ? "60vh"
+                : "40vh",
+          width: viewportWidth > 1300 ? "75vw" : "60vw",
           margin: "0 auto",
         }}
       />

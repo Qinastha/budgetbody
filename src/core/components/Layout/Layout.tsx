@@ -2,9 +2,12 @@ import React, { useRef, useState } from "react";
 import "./Layout.scss";
 import { Outlet } from "react-router-dom";
 import { Navbar } from "../Navbar/Navbar";
+import { useAppSelector } from "../../../hooks";
+import { getUserTheme } from "../../../store/userSlice";
 
 export const Layout: React.FC = () => {
   const [isNavbarHidden, setIsNavbarHidden] = useState<boolean>(false);
+  const theme = useAppSelector(getUserTheme);
   const toggleNavbar = (e: React.TouchEvent) => {
     e.stopPropagation();
     setIsNavbarHidden(!isNavbarHidden);
@@ -35,7 +38,8 @@ export const Layout: React.FC = () => {
     touchEndX.current = e.touches[0].clientX;
   };
   return (
-    <div className={`layoutContainer  ${!isNavbarHidden ? "" : "hidden"}`}>
+    <div
+      className={`layoutContainer  ${!isNavbarHidden ? "" : "hidden"} ${theme}`}>
       <header>
         <div className={`headerContent  ${!isNavbarHidden ? "" : "hidden"}`}>
           <Navbar />

@@ -306,6 +306,7 @@ export const user = createSlice({
       state.analytics.dashboardAnalytics.timeResolution,
     getExpensesActivePeriod: state =>
       state.analytics.expensesAnalytics.timeResolution,
+    getUserTheme: state => state.applicationSettings.theme,
   },
   extraReducers: builder => {
     builder.addCase(
@@ -389,9 +390,9 @@ export const {
   getUserCurrency,
   getExpenseAnalytics,
   getDashboardAnalytics,
-  getDiagramType,
   getDashboardActivePeriod,
   getExpensesActivePeriod,
+  getUserTheme,
 } = user.selectors;
 
 export default user.reducer;

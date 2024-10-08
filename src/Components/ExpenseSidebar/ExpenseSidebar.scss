@@ -19,7 +19,6 @@
   right: -35vw;
   width: 30vw;
   height: 100vh;
-  background-color: lightgreen;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   padding: 1rem;
@@ -62,16 +61,7 @@
         font-size: 1rem;
         padding-bottom: 1rem;
         box-sizing: border-box;
-        transition: all 0.3s ease-in-out;
-
-        &.selected {
-          color: white;
-          background-color: darkgrey;
-        }
-
-        &:hover {
-          background-color: darkgrey;
-        }
+        transition: all 0.4s ease-in-out;
       }
     }
 

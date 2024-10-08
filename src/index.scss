@@ -1,8 +1,10 @@
+@import "./assets/styles/variables.scss";
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,3 +12,150 @@ body {
 #root {
   max-height: 100vh;
 }
+
+.orange-black {
+  .navbarContainer--links a.active, .navbarContainer--links [class^="material"]:hover, .expenseItemContainer [class^="material"],
+  .miniProfileContainer [class^="material"], .logoContainer, .settingsContainer h1, .dashboardContainer [class^="material"] {
+    color: $primaryOrange;
+  }
+
+  .navbarContainer--links a, .miniProfileContainer {
+    color: $primaryWhite;
+  }
+
+  .headerContent {
+    box-shadow: 0 4px 20px -5px rgba($primaryOrange, 0.8);
+  }
+
+  .mainContent {
+    background: $secondaryBlack;
+    color: $primaryWhite;
+  }
+
+  .dashboardItemContainer--module, .sidebarContainer {
+    background: linear-gradient(60deg, $secondaryBlack, $primaryOrange);
+  }
+
+  .categoryItem {
+
+    &.selected {
+      color: $secondaryBlack;
+      background-color: darken($primaryOrange, 5%);
+    }
+
+    &:hover {
+      background-color: darken($primaryOrange, 5%);
+    }
+  }
+
+  .miniProfileContainer {
+    img {
+      border: 2px solid $primaryOrange;
+    }
+  }
+
+  .periodItemContainer {
+    color: $primaryWhite;
+
+    li {
+      &.active, &:hover {
+        color: $primaryOrange;
+      }
+    }
+  }
+
+  .addExpenseButton {
+    color: $primaryWhite;
+
+    &:hover {
+      color: $primaryOrange;
+    }
+  }
+
+  .profileSettingsContainer h3, .appSettingsContainer h3, .expensesContainer--left_list-item {
+    border-bottom: 1px solid $primaryOrange;
+  }
+
+
+  .navbarContainer--links a:hover {
+    border-left: 10px solid $primaryOrange;
+  }
+
+  .expensesContainer--left_list, .expensesContainer--right {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.light-blue {
+  .navbarContainer--links a.active, .navbarContainer--links [class^="material"]:hover, .expenseItemContainer [class^="material"],
+  .miniProfileContainer [class^="material"], .logoContainer, .settingsContainer h1, .dashboardContainer [class^="material"] {
+    color: $secondaryBlue;
+  }
+
+  .navbarContainer--links a, .miniProfileContainer {
+    color: $secondaryBlack;
+  }
+
+  .headerContent {
+    box-shadow: 0 4px 35px -6px rgba($secondaryBlue, 0.8);
+  }
+
+  .mainContent {
+    background: rgba($secondaryLightGrey, 0.3);
+    color: $secondaryBlack;
+  }
+
+  .dashboardItemContainer--module, .sidebarContainer {
+    background: linear-gradient(60deg, $secondaryLightGrey, $secondaryBlue);
+  }
+
+  .categoryItem {
+
+    &.selected {
+      color: $primaryWhite;
+      background-color: lighten($secondaryBlue, 5%);
+    }
+
+    &:hover {
+      background-color: lighten($secondaryBlue, 5%);
+    }
+  }
+
+  .miniProfileContainer {
+    img {
+      border: 2px solid $secondaryBlue;
+    }
+  }
+
+  .periodItemContainer {
+    color: $primaryBlack;
+
+    li {
+      &.active, &:hover {
+        color: $secondaryBlue;
+      }
+    }
+  }
+
+  .addExpenseButton {
+    color: $secondaryBlack;
+
+    &:hover {
+      color: $secondaryBlue;
+    }
+  }
+
+  .profileSettingsContainer h3, .appSettingsContainer h3, .expensesContainer--left_list-item {
+    border-bottom: 1px solid $secondaryBlue;
+  }
+
+  .navbarContainer--links a:hover {
+    border-left: 10px solid $secondaryBlue;
+  }
+
+  .expensesContainer--left_list, .expensesContainer--right {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+

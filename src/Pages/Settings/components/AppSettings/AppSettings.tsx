@@ -167,8 +167,8 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
                 name="theme"
                 value={appSettingsForm.theme}
                 onChange={handleInputChange}>
-                <option value="dark-green">
-                  {t("appSettings.theme.blackGreen")}
+                <option value="orange-black">
+                  {t("appSettings.theme.blackOrange")}
                 </option>
                 <option value="light-blue">
                   {t("appSettings.theme.lightBlue")}
