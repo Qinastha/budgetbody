@@ -29,7 +29,8 @@ export const Dashboard: React.FC = () => {
 
   const checkPortraitMobile = () => {
     const isPortrait = window.screen.orientation
-      ? window.screen.orientation.type.startsWith("portrait")
+      ? window.screen.orientation.type.startsWith("portrait") &&
+        viewportWidth < 768
       : viewportWidth < 500;
 
     setIsPortraitMobile(isPortrait);

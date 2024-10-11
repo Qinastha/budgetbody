@@ -4,12 +4,27 @@
   padding-top: 1rem;
   box-sizing: border-box;
 
-  img {
-    border-radius: 50%;
-    width: 6rem;
-    height: 6rem;
-    cursor: pointer;
-    object-fit: contain;
+  &__upPart {
+    padding-bottom: 0.5rem;
+    box-sizing: border-box;
+
+    .material-symbols-outlined {
+      font-size: 6rem;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        scale: 1.1;
+      }
+    }
+
+    img {
+      border-radius: 50%;
+      width: 6rem;
+      height: 6rem;
+      cursor: pointer;
+      object-fit: contain;
+    }
   }
 
   &__lowPart {
@@ -40,9 +55,15 @@
 
 @media (max-width: 768px) {
   .miniProfileContainer {
-    img {
-      height: 4rem;
-      width: 4rem;
+    &__upPart {
+      .material-symbols-outlined {
+        font-size: 4rem;
+      }
+
+      img {
+        height: 4rem;
+        width: 4rem;
+      }
     }
 
     &__lowPart {
@@ -57,9 +78,15 @@
   .miniProfileContainer {
     padding-top: 0.5rem;
 
-    img {
-      height: 3.5rem;
-      width: 3.5em;
+    &__upPart {
+      .material-symbols-outlined {
+        font-size: 3.5rem;
+      }
+
+      img {
+        height: 3.5rem;
+        width: 3.5em;
+      }
     }
 
     &__lowPart {

@@ -70,7 +70,7 @@ export const Login: React.FC = () => {
         </p>
         <CustomButton
           label={t("button.submit")}
-          view={"colourButton"}
+          view={"classic"}
           onClick={handleSubmit}
         />
       </div>

@@ -31,12 +31,17 @@
     display: flex;
     justify-content: end;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
+    padding-top: 2rem;
+    box-sizing: border-box;
   }
 }
 
 @media (max-width: 768px) {
   .profileSettingsContainer {
+    width: 95%;
+    align-self: center;
+
     &--inputs {
       grid-template-columns: 1fr;
 
@@ -47,7 +52,6 @@
 
     &--buttons {
       padding-top: 1rem;
-      box-sizing: border-box;
     }
   }
 }

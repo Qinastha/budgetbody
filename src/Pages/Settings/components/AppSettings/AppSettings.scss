@@ -36,6 +36,8 @@
       select {
         padding: 0.5rem;
         box-sizing: border-box;
+        border: none;
+        border-radius: 5px;
       }
     }
   }
@@ -44,11 +46,16 @@
     display: flex;
     justify-content: end;
     align-items: center;
+    padding-top: 2rem;
+    box-sizing: border-box;
   }
 }
 
 @media (max-width: 768px) {
   .appSettingsContainer {
+    width: 95%;
+    align-self: center;
+    
     &--inputs {
       grid-template-columns: 1fr;
 
@@ -63,7 +70,6 @@
 
     &--button {
       padding-top: 1rem;
-      box-sizing: border-box;
     }
   }
 }

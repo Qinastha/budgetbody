@@ -2,13 +2,14 @@ import React, { useCallback } from "react";
 import "./MiniProfile.scss";
 import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { getUser, getUserAvatar, setUserAvatar } from "../../store/userSlice";
+import { getUser, setUserAvatar } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
 
 export const MiniProfile: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { avatar, userName } = useAppSelector(getUser);
+  const isProfilePicture = avatar !== "no avatar";
 
   const handleUploadMessage = async (fileURL: string) => {
     if (!fileURL) {
@@ -64,14 +65,20 @@ export const MiniProfile: React.FC = () => {
 
   return (
     <div className="miniProfileContainer">
-      <img src={avatar} alt="avatar" onClick={handleButtonClick} />
-      <input
-        type="file"
-        id="file-input"
-        style={{ display: "none" }}
-        onChange={handleChange}
-        accept="image/*"
-      />
+      <div className="miniProfileContainer__upPart" onClick={handleButtonClick}>
+        {isProfilePicture ? (
+          <img src={avatar} alt="avatar" />
+        ) : (
+          <span className="material-symbols-outlined">account_circle</span>
+        )}
+        <input
+          type="file"
+          id="file-input"
+          style={{ display: "none" }}
+          onChange={handleChange}
+          accept="image/*"
+        />
+      </div>
       <div className="miniProfileContainer__lowPart">
         <p>{userName}</p>
         <span onClick={handleLogout} className="material-symbols-outlined">

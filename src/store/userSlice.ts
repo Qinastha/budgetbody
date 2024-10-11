@@ -51,7 +51,7 @@ export const defaultApplicationSettings: IApplicationSettings = {
   monthCredit: zeroFinances,
   monthOther: zeroFinances,
   currency: defaultCurrency,
-  theme: "dark-green",
+  theme: "",
   diagramLineType: "line",
 };
 
@@ -148,6 +148,10 @@ export const updateApplicationSettingsData = createAsyncThunk(
         },
       );
       if (response?.data?.value) {
+        localStorage.setItem(
+          "theme",
+          response.data.value.applicationSettings.theme,
+        );
         return response.data.value;
       } else {
         console.error("Failed to update application settings");
@@ -296,7 +300,6 @@ export const user = createSlice({
   },
   selectors: {
     getUser: state => state,
-    getUserAvatar: state => state.avatar,
     getUserExpenses: state => state.expenses,
     getUserCurrency: state => state.applicationSettings.currency,
     getExpenseAnalytics: state => state.analytics.expensesAnalytics,
@@ -312,6 +315,12 @@ export const user = createSlice({
     builder.addCase(
       fetchUserData.fulfilled,
       (state, action: PayloadAction<IUser>) => {
+        if (!localStorage.getItem("theme")) {
+          localStorage.setItem(
+            "theme",
+            action.payload.applicationSettings.theme,
+          );
+        }
         return {
           ...state,
           ...action.payload,
@@ -385,7 +394,6 @@ export const { setUserAvatar } = user.actions;
 
 export const {
   getUser,
-  getUserAvatar,
   getUserExpenses,
   getUserCurrency,
   getExpenseAnalytics,

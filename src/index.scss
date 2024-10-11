@@ -7,6 +7,7 @@ body {
   sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 #root {
@@ -15,11 +16,16 @@ body {
 
 .orange-black {
   .navbarContainer--links a.active, .navbarContainer--links [class^="material"]:hover, .expenseItemContainer [class^="material"],
-  .miniProfileContainer [class^="material"], .logoContainer, .settingsContainer h1, .dashboardContainer [class^="material"] {
+  .miniProfileContainer [class^="material"], .logoContainer, .settingsContainer h1, .dashboardContainer [class^="material"],
+  .loginContainer p a, .registerContainer p a, .expensesContainer h1, .dashboardContainer h1 {
     color: $primaryOrange;
   }
 
-  .navbarContainer--links a, .miniProfileContainer {
+  .layoutContainer, .loginPageWrapper, .registerPageWrapper {
+    background-color: $primaryBlack;
+  }
+
+  .navbarContainer--links a, .miniProfileContainer, .loginContainer, .registerContainer {
     color: $primaryWhite;
   }
 
@@ -84,15 +90,97 @@ body {
   .expensesContainer--left_list, .expensesContainer--right {
     background-color: rgba(255, 255, 255, 0.1);
   }
+
+  .customButton {
+    &.classic {
+      color: $primaryWhite;
+      background-color: $primaryOrange;
+    }
+
+    &.delete {
+      color: $secondaryBlack;
+      background-color: $primaryWhite;
+
+      &:hover {
+        color: red;
+      }
+    }
+
+    &.itemDelete {
+      color: $primaryOrange;
+
+      &:hover {
+        color: red;
+        scale: 1.4;
+      }
+    }
+  }
+
+  .settingsContainer, .loginContainer, .registerContainer {
+    input {
+      &:focus {
+        border: 1px solid $primaryOrange
+      }
+    }
+  }
+
+  .progressItemContainer--item_progress {
+    &::-webkit-progress-bar {
+      background-color: $primaryWhite;
+      border-radius: 5px;
+    }
+
+    &::-webkit-progress-value {
+      background-color: $primaryOrange;
+      border-radius: 4px;
+    }
+
+    &::-moz-progress-bar {
+      background-color: $primaryOrange;
+      border-radius: 4px;
+    }
+
+    &::-ms-fill {
+      background-color: $primaryOrange;
+      border-radius: 4px;
+    }
+  }
+
+  .language-switcher .front, .language-switcher .back {
+    background: linear-gradient(60deg, $secondaryBlack, $primaryOrange);
+    color: $primaryWhite;
+  }
+
+  .sidebarContainer--content_input input {
+    border-bottom: 1px solid $primaryWhite;
+    color: $primaryWhite;
+  }
+
+  .logoContainer {
+    background: linear-gradient(135deg, #F37335, #1E1E1E);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .gender-group {
+    input[type="radio"] {
+      accent-color: $primaryOrange;
+    }
+  }
 }
 
 .light-blue {
   .navbarContainer--links a.active, .navbarContainer--links [class^="material"]:hover, .expenseItemContainer [class^="material"],
-  .miniProfileContainer [class^="material"], .logoContainer, .settingsContainer h1, .dashboardContainer [class^="material"] {
+  .miniProfileContainer [class^="material"], .logoContainer, .settingsContainer h1, .dashboardContainer [class^="material"],
+  .loginContainer p a, .registerContainer p a, .expensesContainer h1, .dashboardContainer h1 {
     color: $secondaryBlue;
   }
 
-  .navbarContainer--links a, .miniProfileContainer {
+  .layoutContainer, .loginPageWrapper, .registerPageWrapper {
+    background-color: $secondaryLightGrey;
+  }
+
+  .navbarContainer--links a, .miniProfileContainer, .loginContainer, .registerContainer {
     color: $secondaryBlack;
   }
 
@@ -155,6 +243,83 @@ body {
 
   .expensesContainer--left_list, .expensesContainer--right {
     background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .customButton {
+    &.classic {
+      color: $primaryWhite;
+      background-color: $secondaryBlue;
+    }
+
+    &.delete {
+      color: $secondaryBlack;
+      background-color: darken($secondaryLightGrey, 10%);
+
+      &:hover {
+        color: red;
+      }
+    }
+
+    &.itemDelete {
+      color: $secondaryBlue;
+
+      &:hover {
+        scale: 1.4;
+        color: red;
+      }
+    }
+  }
+
+  .settingsContainer, .loginContainer, .registerContainer {
+    input {
+      &:focus {
+        border: 1px solid $secondaryBlue;
+      }
+    }
+  }
+
+  .progressItemContainer--item_progress {
+    &::-webkit-progress-bar {
+      background-color: $primaryWhite;
+      border-radius: 5px;
+    }
+
+    &::-webkit-progress-value {
+      background-color: $secondaryBlue;
+      border-radius: 4px;
+    }
+
+    &::-moz-progress-bar {
+      background-color: $secondaryBlue;
+      border-radius: 4px;
+    }
+
+    &::-ms-fill {
+      background-color: $secondaryBlue;
+      border-radius: 4px;
+    }
+  }
+
+  .language-switcher .front, .language-switcher .back {
+    background: linear-gradient(60deg, $secondaryLightGrey, $secondaryBlue);
+    color: $secondaryBlack;
+  }
+
+  .sidebarContainer--content_input input {
+    border-bottom: 1px solid $secondaryBlack;
+    color: $secondaryBlack;
+  }
+
+  .logoContainer {
+    background: linear-gradient(135deg, #6e45e2, #88d3ce);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .gender-group {
+    input[type="radio"] {
+      accent-color: $secondaryBlue;
+    }
   }
 }
 

@@ -32,6 +32,7 @@ export const ExpenseSidebar: React.FC<SidebarProps> = ({
   };
 
   const handleNewExpense = () => {
+    if (!newExpense.category || !newExpense.value) return;
     const body = {
       ...newExpense,
       value: +newExpense.value,
@@ -81,7 +82,7 @@ export const ExpenseSidebar: React.FC<SidebarProps> = ({
 
           <CustomButton
             label={t("button.submit")}
-            view={"submit"}
+            view={"classic"}
             onClick={handleNewExpense}
           />
         </div>

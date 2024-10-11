@@ -174,7 +174,7 @@ export const Chart: React.FC<ChartProps> = ({
               ? "80vh"
               : viewportHeight < 840
                 ? "60vh"
-                : "40vh",
+                : "50vh",
           width: viewportWidth > 1300 ? "75vw" : "60vw",
           margin: "0 auto",
         }}

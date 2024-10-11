@@ -114,9 +114,11 @@
     height: auto;
     max-height: 100vh;
     row-gap: 1rem;
+    padding: 1rem;
 
     h1 {
       padding-bottom: 0;
+      text-align: start;
     }
 
     .addExpenseButton {

@@ -13,7 +13,7 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
   onClick,
 }) => {
   return (
-    <button type="button" className={view} onClick={onClick}>
+    <button type="button" className={`customButton ${view}`} onClick={onClick}>
       {label}
     </button>
   );

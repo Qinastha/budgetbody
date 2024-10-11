@@ -44,7 +44,7 @@
     h2 {
       margin: 0;
       padding: 4rem 1rem;
-      font-size: 1.5rem;
+      font-size: 2rem;
       box-sizing: border-box;
       text-align: center;
       hyphens: auto;
@@ -58,9 +58,10 @@
       flex-grow: 2;
 
       .categoryItem {
-        font-size: 1rem;
-        padding-bottom: 1rem;
+        font-size: 1.4rem;
+        padding: 1rem;
         box-sizing: border-box;
+        border-radius: 5px;
         transition: all 0.4s ease-in-out;
       }
     }
@@ -76,13 +77,15 @@
         padding-bottom: 1rem;
         box-sizing: border-box;
         font-size: 1.2rem;
+        font-weight: bold;
       }
 
       input {
         outline: none;
         border: none;
         background-color: inherit;
-        border-bottom: 1px solid black;
+        font-weight: bold;
+        text-align: center;
       }
     }
   }
@@ -92,6 +95,18 @@
   .sidebarContainer {
     right: -70vw;
     width: 65vw;
+
+    &--content {
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      &_list {
+        .categoryItem {
+          font-size: 1rem;
+        }
+      }
+    }
   }
 }
 

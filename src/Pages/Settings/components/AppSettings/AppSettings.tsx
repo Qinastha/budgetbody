@@ -210,7 +210,7 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
           <div className="appSettingsContainer--button">
             <CustomButton
               label={t("button.update")}
-              view={"white"}
+              view={"classic"}
               onClick={handleSubmit}
             />
           </div>

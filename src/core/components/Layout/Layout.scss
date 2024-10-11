@@ -10,14 +10,6 @@
   overflow-x: hidden;
   transition: all 0.3s ease-in-out;
 
-  &.orange-black {
-    background-color: $primaryBlack;
-  }
-
-  &.light-blue {
-    background-color: $secondaryLightGrey;
-  }
-
   &.hidden {
     grid-template-columns: 0 1fr;
   }

@@ -87,7 +87,7 @@ export const ProfileSettings: React.FC<ProfileSettingsProps> = ({
       <div className="profileSettingsContainer--buttons">
         <CustomButton
           label={t("button.update")}
-          view={"white"}
+          view={"classic"}
           onClick={handleSubmit}
         />
         <CustomButton

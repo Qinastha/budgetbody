@@ -33,18 +33,6 @@
   .spendSum {
     padding-right: 0.5rem;
   }
-
-  button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-
-    &:hover {
-      scale: 1.4;
-      color: red;
-    }
-  }
 }
 
 @media (max-width: 768px) {

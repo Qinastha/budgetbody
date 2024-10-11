@@ -13,4 +13,19 @@
     padding-right: 1rem;
     box-sizing: border-box;
   }
+
+  input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+@media (max-height: 600px) {
+  .gender-group {
+    input[type="radio"] {
+      width: 15px;
+      height: 15px;
+    }
+  }
 }

@@ -61,6 +61,10 @@
         }
       }
     }
+
+    &:last-child {
+      padding-bottom: 0.5rem;
+    }
   }
 }
 
@@ -72,6 +76,10 @@
       a {
         font-size: 1rem;
       }
+    }
+
+    &:last-child {
+      padding-bottom: 0.3rem;
     }
   }
 }

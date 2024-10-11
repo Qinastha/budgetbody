@@ -1,0 +1,37 @@
+.customButton {
+  box-sizing: border-box;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &.classic, &.delete {
+    padding: 1rem;
+    border-radius: 15px;
+    hyphens: auto;
+  }
+
+  &.classic {
+    &:hover {
+      scale: 1.1;
+    }
+  }
+
+  &.itemDelete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+@media (max-width: 768px) or (max-height: 450px) {
+  .customButton {
+    &.classic {
+      padding: 0.8rem;
+    }
+
+    &.delete {
+      padding: 0.6rem;
+    }
+  }
+}

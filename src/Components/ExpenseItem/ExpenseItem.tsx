@@ -32,7 +32,7 @@ export const ExpenseItem: React.FC<ExpenseItemProps> = ({
         {!expense.category.includes("month") && (
           <CustomButton
             label={"X"}
-            view={"delete"}
+            view={"itemDelete"}
             onClick={() => deleteExpense(expense)}
           />
         )}
