@@ -8,6 +8,7 @@ import { getUserTheme } from "./store/userSlice";
 export const App = () => {
   const [theme, setTheme] = useState<string | null>("orange-black");
   const userTheme = useAppSelector(getUserTheme);
+
   useEffect(() => {
     const defaultTheme =
       userTheme !== ""
