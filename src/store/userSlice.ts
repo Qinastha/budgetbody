@@ -162,6 +162,31 @@ export const updateApplicationSettingsData = createAsyncThunk(
   },
 );
 
+export const updateMonthFinances = createAsyncThunk(
+    "userData/updateMonthFinances",
+    async (data: any) => {
+        try {
+            const response = await axios.put(
+                `${process.env.REACT_APP_BASE_URL}/time-series/month-update`,
+                data,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                },
+            );
+            if (response?.data?.value) {
+                return response.data.value;
+            } else {
+                console.error("Failed to update application settings");
+            }
+        } catch (err) {
+            throw err;
+        }
+    },
+);
+
 export const deleteUserProfile = createAsyncThunk(
   "userData/deleteUserProfile",
   async () => {
@@ -310,6 +335,12 @@ export const user = createSlice({
     getExpensesActivePeriod: state =>
       state.analytics.expensesAnalytics.timeResolution,
     getUserTheme: state => state.applicationSettings.theme,
+      getLastIncome: state => {
+        console.log('check in state')
+          console.log(state)
+          console.log([...state.incomes].sort((a: ITimeSeries,b: ITimeSeries) => b.timestamp.getTime() - a.timestamp.getTime()))
+          return state.incomes.length > 0 ? [...state.incomes].sort((a: ITimeSeries,b: ITimeSeries) => b.timestamp.getTime() - a.timestamp.getTime())[0] : null
+      }
   },
   extraReducers: builder => {
     builder.addCase(
@@ -348,6 +379,15 @@ export const user = createSlice({
         };
       },
     );
+      builder.addCase(
+          updateMonthFinances.fulfilled,
+          (state, action: PayloadAction<IUser>) => {
+              return {
+                  ...state,
+                  ...action.payload,
+              };
+          },
+      );
     builder.addCase(deleteUserProfile.fulfilled, state => {
       return initialState;
     });
@@ -401,6 +441,7 @@ export const {
   getDashboardActivePeriod,
   getExpensesActivePeriod,
   getUserTheme,
+    getLastIncome
 } = user.selectors;
 
 export default user.reducer;
