@@ -5,6 +5,8 @@
   padding: 1.5rem;
   box-sizing: border-box;
   max-height: 100vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
 
   h1 {
     hyphens: auto;
@@ -49,6 +51,12 @@
 }
 
 @media (max-height: 450px) {
+  .settingsContainer {
+    overflow-y: auto;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
   .settingsContainer {
     overflow-y: auto;
   }

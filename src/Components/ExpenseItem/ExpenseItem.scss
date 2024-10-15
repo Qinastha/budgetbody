@@ -33,6 +33,12 @@
   .spendSum {
     padding-right: 0.5rem;
   }
+
+  .blankPlaceholder {
+    box-sizing: border-box;
+    padding-inline: 6px;
+    padding-block: 1px;
+  }
 }
 
 @media (max-width: 768px) {
