@@ -29,12 +29,14 @@ export const ExpenseItem: React.FC<ExpenseItemProps> = ({
         <p className="spendSum">
           {expense.value[userCurrency.code] + userCurrency.symbol}
         </p>
-        {!expense.category.includes("month") && (
+        {!expense.category.includes("month") ? (
           <CustomButton
             label={"X"}
             view={"itemDelete"}
             onClick={() => deleteExpense(expense)}
           />
+        ) : (
+          <div className="blankPlaceholder"></div>
         )}
       </span>
     </div>
