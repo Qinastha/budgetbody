@@ -32,6 +32,7 @@ export const Register: React.FC = () => {
             onChange={handleInputChange}
             className={errors.email ? "error-border" : ""}
             required={true}
+            autoComplete="off"
           />
           {errors.email && <p className="error-message">{t("error.email")}</p>}
 
@@ -43,6 +44,7 @@ export const Register: React.FC = () => {
             onChange={handleInputChange}
             className={errors.password ? "error-border" : ""}
             required={true}
+            autoComplete="off"
           />
           {errors.password && (
             <p className="error-message">{t("error.password")}</p>
@@ -56,6 +58,7 @@ export const Register: React.FC = () => {
             onChange={handleInputChange}
             className={errors.userName ? "error-border" : ""}
             required={true}
+            autoComplete="off"
           />
           {errors.userName && (
             <p className="error-message">{t("error.userName")}</p>
@@ -69,6 +72,7 @@ export const Register: React.FC = () => {
             onChange={handleInputChange}
             className={errors.address ? "error-border" : ""}
             required={true}
+            autoComplete="off"
           />
           {errors.address && (
             <p className="error-message">{t("error.address")}</p>
@@ -83,6 +87,7 @@ export const Register: React.FC = () => {
             className={errors.dateOfBirth ? "error-border" : ""}
             max={`${currentYear}-12-31`}
             required={true}
+            autoComplete="off"
           />
           {errors.dateOfBirth && (
             <p className="error-message">

@@ -55,6 +55,7 @@ export const Login: React.FC = () => {
             placeholder={t("login.placeholder.email")}
             value={loginForm.email}
             onChange={handleInputChange}
+            autoComplete="off"
           />
           <input
             type="password"
@@ -62,6 +63,7 @@ export const Login: React.FC = () => {
             placeholder={t("login.placeholder.password")}
             value={loginForm.password}
             onChange={handleInputChange}
+            autoComplete="off"
           />
         </form>
         <p>
