@@ -10,4 +10,6 @@ export type ApplicationSettingsForm = {
   currency: ICurrency;
   theme: string;
   diagramLineType: string;
+
+  [key: string]: string | number | ICurrency;
 };

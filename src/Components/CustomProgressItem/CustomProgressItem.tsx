@@ -29,7 +29,7 @@ export const CustomProgressItem: React.FC<CustomProgressItemProps> = ({
           <div key={category} className="progressItemContainer--item">
             <div className="progressItemContainer--item_header">
               <p>{getAllExpenseLabels()[category]}</p>
-              <p>{value[userCurrency.code] + userCurrency.symbol}</p>
+              <p>{value[userCurrency.code].toFixed(0) + userCurrency.symbol}</p>
             </div>
             <progress
               value={value[userCurrency.code]}

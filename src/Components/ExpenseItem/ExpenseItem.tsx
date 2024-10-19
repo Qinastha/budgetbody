@@ -27,7 +27,7 @@ export const ExpenseItem: React.FC<ExpenseItemProps> = ({
       </span>
       <span className="expenseItemRightPart">
         <p className="spendSum">
-          {expense.value[userCurrency.code] + userCurrency.symbol}
+          {expense.value[userCurrency.code].toFixed(0) + userCurrency.symbol}
         </p>
         {!expense.category.includes("month") ? (
           <CustomButton

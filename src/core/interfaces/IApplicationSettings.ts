@@ -11,4 +11,6 @@ export interface IApplicationSettings {
   currency: ICurrency;
   theme: string;
   diagramLineType: string;
+
+  [key: string]: string | IFinances | ICurrency;
 }

@@ -4,6 +4,7 @@ import {
   handleOnlyNumbers,
   IApplicationSettings,
   ICurrency,
+  IFinances,
 } from "../../../../core";
 import { useTranslation } from "react-i18next";
 import "./AppSettings.scss";
@@ -32,12 +33,17 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
 
   const [appSettingsForm, setAppSettingsForm] =
     useState<ApplicationSettingsForm>({
-      monthIncome: applicationSettings?.monthIncome[userCurrency.code],
-      monthHealthcare: applicationSettings?.monthHealthcare[userCurrency.code],
-      monthTax: applicationSettings?.monthTax[userCurrency.code],
-      monthHousing: applicationSettings?.monthHousing[userCurrency.code],
-      monthCredit: applicationSettings?.monthCredit[userCurrency.code],
-      monthOther: applicationSettings?.monthOther[userCurrency.code],
+      monthIncome:
+        +applicationSettings?.monthIncome[userCurrency.code].toFixed(2),
+      monthHealthcare:
+        +applicationSettings?.monthHealthcare[userCurrency.code].toFixed(2),
+      monthTax: +applicationSettings?.monthTax[userCurrency.code].toFixed(2),
+      monthHousing:
+        +applicationSettings?.monthHousing[userCurrency.code].toFixed(2),
+      monthCredit:
+        +applicationSettings?.monthCredit[userCurrency.code].toFixed(2),
+      monthOther:
+        +applicationSettings?.monthOther[userCurrency.code].toFixed(2),
       currency: applicationSettings?.currency,
       theme: applicationSettings?.theme,
       diagramLineType: applicationSettings?.diagramLineType,
@@ -47,7 +53,7 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     let { name, value } = e.target;
-    let newValue: any;
+    let newValue: string | number | undefined;
     if (name !== "currency" && name !== "theme" && name !== "diagramLineType") {
       newValue = +value;
     } else {
@@ -67,41 +73,57 @@ export const AppSettings: React.FC<AppSettingsProps> = ({
         return {
           ...prevData,
           currency: newCurrency,
-          monthIncome: applicationSettings.monthIncome[newCurrency.code],
+          monthIncome:
+            +applicationSettings.monthIncome[newCurrency.code].toFixed(2),
           monthHealthcare:
-            applicationSettings.monthHealthcare[newCurrency.code],
-          monthTax: applicationSettings.monthTax[newCurrency.code],
-          monthHousing: applicationSettings.monthHousing[newCurrency.code],
-          monthCredit: applicationSettings.monthCredit[newCurrency.code],
-          monthOther: applicationSettings.monthOther[newCurrency.code],
+            +applicationSettings.monthHealthcare[newCurrency.code].toFixed(2),
+          monthTax: +applicationSettings.monthTax[newCurrency.code].toFixed(2),
+          monthHousing:
+            +applicationSettings.monthHousing[newCurrency.code].toFixed(2),
+          monthCredit:
+            +applicationSettings.monthCredit[newCurrency.code].toFixed(2),
+          monthOther:
+            +applicationSettings.monthOther[newCurrency.code].toFixed(2),
         };
       });
     }
   };
 
   const handleSubmit = () => {
-    let result: any = {};
-    Object.keys(applicationSettings).forEach((key: string) => {
-      if (
-        ((key === "theme" || key === "diagramLineType") &&
-          applicationSettings[key] !== appSettingsForm[key]) ||
-        (key === "currency" &&
-          applicationSettings[key].code !== appSettingsForm[key].code) ||
-        ((key === "monthIncome" ||
-          key === "monthHealthcare" ||
-          key === "monthTax" ||
-          key === "monthHousing" ||
-          key === "monthCredit" ||
-          key === "monthOther") &&
-          applicationSettings[key][applicationSettings.currency.code] !==
-            appSettingsForm[key])
-      ) {
-        result[key] = appSettingsForm[key];
+    let result: Partial<ApplicationSettingsForm> = {};
+    const monthFields = [
+      "monthIncome",
+      "monthHealthcare",
+      "monthTax",
+      "monthHousing",
+      "monthCredit",
+      "monthOther",
+    ];
+    const { currency, theme, diagramLineType } = applicationSettings;
+    const currentCurrencyCode =
+      currency.code !== appSettingsForm.currency.code
+        ? appSettingsForm.currency.code
+        : currency.code;
+
+    // Compare and assign only if values are different
+    if (theme !== appSettingsForm.theme) result.theme = appSettingsForm.theme;
+    if (diagramLineType !== appSettingsForm.diagramLineType)
+      result.diagramLineType = appSettingsForm.diagramLineType;
+    if (currency.code !== appSettingsForm.currency.code)
+      result.currency = appSettingsForm.currency;
+
+    monthFields.forEach(field => {
+      const fieldValue = applicationSettings[field] as IFinances;
+
+      if (fieldValue[currentCurrencyCode] !== appSettingsForm[field]) {
+        result[field] = appSettingsForm[field];
       }
     });
-    dispatch(updateApplicationSettingsData(appSettingsForm));
+
+    dispatch(updateApplicationSettingsData(result));
     navigate("/");
   };
+
   return (
     <div className="appSettingsContainer">
       <h3>{t("appSettings.title")}</h3>
