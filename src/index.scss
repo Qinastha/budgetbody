@@ -14,6 +14,13 @@ body {
   max-height: 100vh;
 }
 
+@media (max-width: 768px) {
+  #root {
+    max-height: 100svh;
+  }
+}
+
+
 .orange-black {
   .navbarContainer--links a.active, .navbarContainer--links [class^="material"]:hover, .expenseItemContainer [class^="material"],
   .miniProfileContainer [class^="material"], .logoContainer, .settingsContainer h1, .dashboardContainer [class^="material"],
