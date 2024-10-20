@@ -45,12 +45,15 @@
 @media (max-width: 768px) {
   .layoutContainer {
     grid-template-columns: minmax(35vw, auto) 1fr;
+    height: 100svh;
+    width: 100svw;
 
     .headerContent {
-      width: 35vw;
+      width: 35svw;
     }
 
     .mainContent {
+      height: 100svh;
     }
   }
 }
