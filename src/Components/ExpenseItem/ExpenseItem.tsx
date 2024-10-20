@@ -23,7 +23,7 @@ export const ExpenseItem: React.FC<ExpenseItemProps> = ({
     <div className="expenseItemContainer">
       <span className="expenseItemLeftPart">
         <span className="material-icons">{eLogo[expense.category]}</span>
-        <p>{getAllExpenseLabels()[expense.category]}</p>
+        <p className="expenseItemName">{getAllExpenseLabels()[expense.category]}</p>
       </span>
       <span className="expenseItemRightPart">
         <p className="spendSum">

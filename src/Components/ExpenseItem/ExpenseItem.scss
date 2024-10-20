@@ -19,6 +19,10 @@
   .expenseItemLeftPart {
     flex-basis: 70%;
     justify-content: start;
+
+    .expenseItemName {
+      margin-left: 10px;
+    }
   }
 
   .expenseItemRightPart {
